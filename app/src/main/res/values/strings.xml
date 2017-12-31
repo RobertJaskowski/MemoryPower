@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MemoryPower</string>
+    <string name="start">Start</string>
+    <string name="how_much_numbers">How much numbers?</string>
+    <string name="next">Next</string>
+    <string name="end">End</string>
+</resources>
