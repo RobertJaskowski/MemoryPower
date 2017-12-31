@@ -19,6 +19,10 @@
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 
+    <style name="testBackgroundForNumbersGridView" parent="android:Widget.TextView">
+        <item name="android:background">@color/colorAccent</item>
+    </style>
+
 
 
 

@@ -37,7 +37,7 @@ public class NumbersSession extends Activity {
         ExpandableHeightGridView gridView = findViewById(R.id.gridView);
         gridView.setExpanded(true);
 
-        NumbersAdapterAll numbersAdapterAll = new NumbersAdapterAll(this, pickerValue);
+        final NumbersAdapterAll numbersAdapterAll = new NumbersAdapterAll(this, pickerValue);
 
         final ArrayList<Number_item> list = numbersAdapterAll.getList();
 
@@ -48,6 +48,8 @@ public class NumbersSession extends Activity {
         textSwitcher = findViewById(R.id.text_switcher);
         nextButton = findViewById(R.id.sessionButton_TextSwitcher);
         progressBar = findViewById(R.id.progressBar_number_session);
+
+
 
 
 
@@ -150,5 +152,19 @@ public class NumbersSession extends Activity {
 
 
         gridView.setAdapter(numbersAdapterAll);
+
+
+        Button endButton = findViewById(R.id.endSession);
+        endButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                nextButton.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
+                textSwitcher.setVisibility(View.GONE);
+
+                numbersAdapterAll.setToNone();
+            }
+        });
+
     }
 }

@@ -40,7 +40,7 @@ class NumbersAdapterAll extends BaseAdapter {
 
 
         for (int i = 0; i < ile; i++) {
-            Number_item tempNumber = new Number_item(i + 1, random.nextInt(10));
+            Number_item tempNumber = new Number_item(i + 1, String.valueOf(random.nextInt(10)));
             list.add(tempNumber);
         }
 
@@ -94,5 +94,14 @@ class NumbersAdapterAll extends BaseAdapter {
 
 
         return row;
+    }
+
+    public void setToNone() {
+        for (int i = 0; i < ile; i++) {
+            Number_item tempNumber = new Number_item(i + 1, " ");
+            list.set(i, tempNumber);
+
+        }
+        notifyDataSetChanged();
     }
 }

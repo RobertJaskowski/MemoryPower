@@ -9,9 +9,9 @@ import android.os.Parcelable;
 
 public class Number_item implements Parcelable {
     int id;
-    int number;
+    String number;
 
-    public Number_item(int id,int number) {
+    public Number_item(int id,String number) {
         this.id = id;
         this.number = number;
 
@@ -19,7 +19,7 @@ public class Number_item implements Parcelable {
 
     protected Number_item(Parcel in) {
         id = in.readInt();
-        number = in.readInt();
+        number = in.readString();
     }
 
     public static final Creator<Number_item> CREATOR = new Creator<Number_item>() {
@@ -42,6 +42,6 @@ public class Number_item implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(id);
-        parcel.writeInt(number);
+        parcel.writeString(number);
     }
 }
