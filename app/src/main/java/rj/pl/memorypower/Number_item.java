@@ -16,6 +16,9 @@ public class Number_item implements Parcelable {
         this.number = number;
 
     }
+//    public Number_item(String number){
+//        this.number = number;
+//    }
 
     protected Number_item(Parcel in) {
         id = in.readInt();

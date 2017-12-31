@@ -1,6 +1,7 @@
 package rj.pl.memorypower;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,15 @@ class NumbersAdapterAll extends BaseAdapter {
 
     private Context context;
     private int ile;
+    private int wchichOneId;
+
+    public void setWchichOneId(int wchichOneId) {
+        this.wchichOneId = wchichOneId;
+        Number_item tempNumber = new Number_item(wchichOneId + 1, " ");
+        list.set(wchichOneId, tempNumber);
+        notifyDataSetChanged();
+
+    }
 
     private Random random = new Random();
 
@@ -103,5 +113,15 @@ class NumbersAdapterAll extends BaseAdapter {
 
         }
         notifyDataSetChanged();
+    }
+
+    public void setInList(int i) {
+        Log.e("asd", String.valueOf(i));
+        Number_item tempNumber = new Number_item(wchichOneId+1 ,String.valueOf(i));
+        list.set(wchichOneId, tempNumber);
+        notifyDataSetChanged();
+        if (wchichOneId<ile-1){
+            wchichOneId++;
+        }
     }
 }
