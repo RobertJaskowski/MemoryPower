@@ -7,8 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
 
-public class NumbersIntro extends Activity {
-
+public class WordsIntro extends Activity {
     NumberPicker numberPicker;
     int numberPickerValue;
 
@@ -20,8 +19,7 @@ public class NumbersIntro extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_numbers_intro);
-
+        setContentView(R.layout.activity_words_intro);
 
         values = new String[24];
 
@@ -31,7 +29,7 @@ public class NumbersIntro extends Activity {
             n += 2;
 
         }
-        numberPicker = findViewById(R.id.NNumber_picker);
+        numberPicker = findViewById(R.id.WNumber_picker);
         numberPicker.setMinValue(0);
         numberPicker.setMaxValue(values.length - 1);
         numberPicker.setWrapSelectorWheel(false);
@@ -41,18 +39,19 @@ public class NumbersIntro extends Activity {
         numberPicker.setDisplayedValues(values);
 
 
-        Button btn = findViewById(R.id.StartNumberSession);
+        Button btn = findViewById(R.id.StartWordsSession);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 numberPickerValue = numberPicker.getValue() * 2 + 4;
 
-                Intent intent = new Intent(view.getContext(),NumbersSession.class);
-                intent.putExtra("picker",numberPickerValue);
+                Intent intent = new Intent(view.getContext(), WordsSession.class);
+                intent.putExtra("picker", numberPickerValue);
                 startActivity(intent);
 
 
             }
         });
+
     }
 }

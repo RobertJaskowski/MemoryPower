@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:id="@+id/words_session_relativeMain"
+tools:context="rj.pl.memorypower.WordsSession">
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <rj.pl.memorypower.ExpandableHeightGridView
+            android:id="@+id/gridViewWords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:horizontalSpacing="4dp"
+            android:isScrollContainer="false"
+            android:numColumns="auto_fit"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="5dp" />
+
+
+        <TextSwitcher
+            android:id="@+id/text_switcher_words"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/gridViewWords"
+            android:layout_marginTop="20dp"
+            android:inAnimation="@android:anim/slide_in_left"
+            android:outAnimation="@android:anim/slide_out_right" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_words_session"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_switcher_words" />
+
+
+        <Button
+            android:id="@+id/sessionButton_TextSwitcher_words"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progressBar_words_session"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/my_button_bg"
+            android:padding="5dp"
+            android:minWidth="183dp"
+            android:text="@string/next" />
+
+        <Button
+            android:id="@+id/endSessionWords"
+            android:padding="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sessionButton_TextSwitcher_words"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/my_button_bg"
+            android:text="@string/end" />
+
+        <Button
+            android:id="@+id/endSessionInputWords"
+            android:padding="10dp"
+            android:layout_marginTop="5dp"
+            android:minWidth="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/endSessionWords"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/my_button_bg"
+            android:text="@string/done"
+            android:layout_marginBottom="100dp"/>
+    </RelativeLayout>
+</ScrollView>
+
+
+</RelativeLayout>

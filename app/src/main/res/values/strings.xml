@@ -4,4 +4,9 @@
     <string name="how_much_numbers">How much numbers?</string>
     <string name="next">Next</string>
     <string name="end">End</string>
+    <string name="done">Done</string>
+    <string name="save_score">Save score?</string>
+    <string name="no">NO</string>
+    <string name="ok">OK</string>
+    <string name="how_much_words">How much words?</string>
 </resources>

@@ -17,7 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".NumbersIntro" />
-        <activity android:name=".NumbersSession"></activity>
+        <activity android:name=".NumbersSession" />
+        <activity android:name=".WordsIntro" />
+        <activity android:name=".WordsSession"></activity>
     </application>
 
 </manifest>

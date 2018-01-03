@@ -8,12 +8,51 @@
 
 
     <GridView
-        android:id="@+id/gridViewKeypad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="5">
+    android:id="@+id/gridViewKeypad"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:numColumns="5">
 
     </GridView>
+
+    <Button
+        android:id="@+id/przyciskOneInKeypad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:minWidth="100dp"
+        android:text="@string/no"
+        android:textColor="@color/dark"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textViewInKeypad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textViewSaveScoreInKeypad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/save_score"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/przyciskTwoInKeypad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:minWidth="100dp"
+        android:text="@string/ok"
+        android:textColor="@color/dark"
+        android:visibility="gone" />
 
 
     <!--fragment-->

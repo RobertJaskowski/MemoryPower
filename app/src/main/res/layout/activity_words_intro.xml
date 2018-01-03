@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="rj.pl.memorypower.NumbersIntro">
+    tools:context="rj.pl.memorypower.WordsIntro">
 
     <Button
-        android:id="@+id/StartNumberSession"
+        android:id="@+id/StartWordsSession"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -21,7 +21,7 @@
     <NumberPicker
 
         android:divider="@color/cardview_light_background"
-        android:id="@+id/NNumber_picker"
+        android:id="@+id/WNumber_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -30,7 +30,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/how_much_numbers"
+        android:text="@string/how_much_words"
         android:textSize="25sp" />
 
 </LinearLayout>
+
+

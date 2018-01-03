@@ -5,11 +5,9 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,7 +20,7 @@ import android.widget.ViewSwitcher;
 
 import java.util.ArrayList;
 
-public class NumbersSession extends Activity {
+public class WordsSession extends Activity {
 
     public static final String EXTRA_PICKER = "picker";
 
@@ -36,24 +34,24 @@ public class NumbersSession extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_numbers_session);
+        setContentView(R.layout.activity_words_session);
 
         pickerValue = (int) getIntent().getExtras().get(EXTRA_PICKER);
 
 
-        final ExpandableHeightGridView gridView = findViewById(R.id.gridView);
+        final ExpandableHeightGridView gridView = findViewById(R.id.gridViewWords);
         gridView.setExpanded(true);
 
-        final NumbersAdapterAll numbersAdapterAll = new NumbersAdapterAll(this, pickerValue);
+        final WordsAdapterAll wordsAdapterAll = new WordsAdapterAll(this, pickerValue);
 
-        final ArrayList<Number_item> list = numbersAdapterAll.getList();
+        final ArrayList<Words_item> list = wordsAdapterAll.getList();
 
 
         //setting Text Switcher
 
-        textSwitcher = findViewById(R.id.text_switcher);
-        nextButton = findViewById(R.id.sessionButton_TextSwitcher);
-        progressBar = findViewById(R.id.progressBar_number_session);
+        textSwitcher = findViewById(R.id.text_switcher_words);
+        nextButton = findViewById(R.id.sessionButton_TextSwitcher_words);
+        progressBar = findViewById(R.id.progressBar_words_session);
 
 
 //        //TODO temp button
@@ -91,25 +89,6 @@ public class NumbersSession extends Activity {
             @Override
             public void onClick(View view) {
 
-                //comment used when want to start over textswitcher
-//                if (stringIndex == list.size()) {
-//                    Log.d("DUPA", String.valueOf(list.size()));
-//
-//                    stringIndex = 0;
-//                    textSwitcher.setText(String.valueOf(list.get(stringIndex).number) + "" + String.valueOf(list.get(stringIndex + 1).number));
-//                    stringIndex += 2;
-//                    progressBar.setProgress(stringIndex);
-//                }
-//                 else if (stringIndex == list.size() - 2) {
-//
-//                    Log.d("kupa", String.valueOf(list.size()));
-//
-//                    textSwitcher.setText(String.valueOf(list.get(stringIndex).number) + "" + String.valueOf(list.get(stringIndex + 1).number) + ".");
-//                    stringIndex += 2;
-//
-//
-//                }
-//                else
                 {
 
                     if (stringIndex == list.size() - 2) {
@@ -133,7 +112,7 @@ public class NumbersSession extends Activity {
         textSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
             public View makeView() {
-                textView = new TextView(NumbersSession.this);
+                textView = new TextView(WordsSession.this);
                 textView.setBackgroundColor(Color.parseColor("#f05545"));
                 textView.setTextColor(Color.WHITE);
                 textView.setTextSize(40);
@@ -151,25 +130,25 @@ public class NumbersSession extends Activity {
 
 
 
-        gridView.setAdapter(numbersAdapterAll);
+        gridView.setAdapter(wordsAdapterAll);
 
 
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                numbersAdapterAll.setWchichOneId(i);
+//                wordsAdapterAll.setWchichOneId(i); TODO add this
 
 
             }
         });
 
 
-        final Button buttonEndSessionInput = findViewById(R.id.endSessionInput);
+        final Button buttonEndSessionInput = findViewById(R.id.endSessionInputWords);
         buttonEndSessionInput.setVisibility(View.INVISIBLE);
 
 
-        final Button endButton = findViewById(R.id.endSession);
+        final Button endButton = findViewById(R.id.endSessionWords);
         endButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -179,9 +158,9 @@ public class NumbersSession extends Activity {
                 endButton.setVisibility(View.GONE);
 
 
-                numbersAdapterAll.setToNone();
+//                wordsAdapterAll.setToNone(); TODO enable this
 
-                final RelativeLayout layout = findViewById(R.id.numbers_session_relativeMain);
+                final RelativeLayout layout = findViewById(R.id.words_session_relativeMain);
                 final LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
 //                final View viewKeys = inflater.inflate(R.layout.session_number_inflation_keypad, (ViewGroup) findViewById(R.id.numbers_session_relativeMain));
 
@@ -189,7 +168,7 @@ public class NumbersSession extends Activity {
                 final View viewKeys = inflater.inflate(R.layout.session_number_inflation_keypad,layout);
 
 
-                //TODO testin button inflation
+
 
                 final Button przyciskOneInkeypad = findViewById(R.id.przyciskOneInKeypad);
                 final Button przyciskTwoInKeypad = findViewById(R.id.przyciskTwoInKeypad);
@@ -206,7 +185,7 @@ public class NumbersSession extends Activity {
 
                 final GridView gridViewKeypad = findViewById(R.id.gridViewKeypad);
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(NumbersSession.this, R.layout.keypad_singleitem, numbers);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(WordsSession.this, R.layout.keypad_singleitem, numbers);
 //                gridViewKeypad.setBackgroundColor(getResources().getColor(R.color.lightGreen));
 
 
@@ -241,7 +220,7 @@ public class NumbersSession extends Activity {
                         handlerr.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                int scoreE = numbersAdapterAll.getScoreE()-4;
+                                int scoreE = wordsAdapterAll.getScoreE()-4;
                                 int scoreM = pickerValue;
 
                                 if (scoreE <= 0){
@@ -278,13 +257,13 @@ public class NumbersSession extends Activity {
             }
 
             private void sesjaSkonczonaPokaz() {
-                numbersAdapterAll.skonczonePokaz();
+                wordsAdapterAll.skonczonePokaz();
             }
 
 
             //TODO
             private void itemClicked(int i) {
-                numbersAdapterAll.setInList(i);
+                wordsAdapterAll.setInList(i);
 //                int start = gridView.getFirstVisiblePosition();
 //                for (int k = start, j = gridView.getLastVisiblePosition(); k <= j; k++) {
 //                    if (i == gridView.getItemIdAtPosition(k)) {
@@ -301,5 +280,5 @@ public class NumbersSession extends Activity {
 
     }
 
+    }
 
-}

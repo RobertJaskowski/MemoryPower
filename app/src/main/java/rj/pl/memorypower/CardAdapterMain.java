@@ -62,7 +62,7 @@ class CardAdapterMain extends RecyclerView.Adapter<CardAdapterMain.ViewHolder> {
                     intent = new Intent(view.getContext(),NumbersIntro.class);
                 }
                 if(position==1){
-//                    intent = new Intent(view.getContext(),NumbersIntro.class);
+                    intent = new Intent(view.getContext(),WordsIntro.class);
                 }
                 if(position==2){
 //                    intent = new Intent(view.getContext(),NumbersIntro.class);
