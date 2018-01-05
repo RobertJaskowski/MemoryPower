@@ -16,7 +16,7 @@ import java.util.Random;
 
 class NumbersAdapterAll extends BaseAdapter {
 
-    //TODO change icon background color on active from text switcher //adapter.notifyDataChanged();
+
 
     /**
      * lista w NumbersAdapterAll

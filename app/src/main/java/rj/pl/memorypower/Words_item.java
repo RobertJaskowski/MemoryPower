@@ -24,6 +24,11 @@ public class Words_item implements Parcelable {
 
     }
 
+    public Words_item(int id, String word) {
+        this.id = id;
+        this.word = word;
+    }
+
     protected Words_item(Parcel in) {
         id = in.readInt();
         number = in.readInt();

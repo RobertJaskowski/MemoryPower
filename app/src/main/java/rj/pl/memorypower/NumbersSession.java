@@ -4,12 +4,13 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class NumbersSession extends Activity {
 
@@ -33,6 +35,8 @@ public class NumbersSession extends Activity {
     private int stringIndex = 0;
     private TextView textView;
 
+    Button endButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +47,8 @@ public class NumbersSession extends Activity {
 
         final ExpandableHeightGridView gridView = findViewById(R.id.gridView);
         gridView.setExpanded(true);
+
+        gridView.setEnabled(false);
 
         final NumbersAdapterAll numbersAdapterAll = new NumbersAdapterAll(this, pickerValue);
 
@@ -56,31 +62,7 @@ public class NumbersSession extends Activity {
         progressBar = findViewById(R.id.progressBar_number_session);
 
 
-//        //TODO temp button
-//        Button endbutton = view.findViewById(R.id.endSession);
-//
-//        endbutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Bundle bundleArray = new Bundle();
-//                bundleArray.putParcelableArrayList("bundleArray",list);
-//
-//                fragmentManager = getActivity().getFragmentManager();
-//                fragmentTransaction = fragmentManager.beginTransaction();
-//
-//
-//
-//                NumbersSessionEnd numbersSessionEnd = new NumbersSessionEnd();
-//
-//                numbersSessionEnd.setArguments(bundleArray);
-//
-//                fragmentTransaction.replace(R.id.main_container, numbersSessionEnd);
-//                fragmentTransaction.commit();
-//
-//
-//            }
-//        });
+
 
 
         progressBar.setMax(list.size());
@@ -169,7 +151,7 @@ public class NumbersSession extends Activity {
         buttonEndSessionInput.setVisibility(View.INVISIBLE);
 
 
-        final Button endButton = findViewById(R.id.endSession);
+        endButton = findViewById(R.id.endSession);
         endButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -177,6 +159,8 @@ public class NumbersSession extends Activity {
                 progressBar.setVisibility(View.GONE);
                 textSwitcher.setVisibility(View.GONE);
                 endButton.setVisibility(View.GONE);
+
+                gridView.setEnabled(true);
 
 
                 numbersAdapterAll.setToNone();
@@ -186,10 +170,10 @@ public class NumbersSession extends Activity {
 //                final View viewKeys = inflater.inflate(R.layout.session_number_inflation_keypad, (ViewGroup) findViewById(R.id.numbers_session_relativeMain));
 
 
-                final View viewKeys = inflater.inflate(R.layout.session_number_inflation_keypad,layout);
+                inflater.inflate(R.layout.session_number_inflation_keypad,layout);
 
 
-                //TODO testin button inflation
+
 
                 final Button przyciskOneInkeypad = findViewById(R.id.przyciskOneInKeypad);
                 final Button przyciskTwoInKeypad = findViewById(R.id.przyciskTwoInKeypad);
@@ -282,7 +266,7 @@ public class NumbersSession extends Activity {
             }
 
 
-            //TODO
+
             private void itemClicked(int i) {
                 numbersAdapterAll.setInList(i);
 //                int start = gridView.getFirstVisiblePosition();
@@ -301,5 +285,40 @@ public class NumbersSession extends Activity {
 
     }
 
+    private void startTimer(long duration, long interval){
+        CountDownTimer timer = new CountDownTimer(duration,interval) {
+            @Override
+            public void onTick(long l) {
 
+                timerText.setText(String.valueOf(TimeUnit.MILLISECONDS.toSeconds(l)));
+
+            }
+
+            @Override
+            public void onFinish() {
+                timerText.setVisibility(View.GONE);
+                timerText.setText("");
+
+                endButton.performClick();
+            }
+        };
+        timer.start();
+    }
+
+    private TextView timerText;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+
+
+            MenuItem timerItem = menu.findItem(R.id.timer_session);
+            timerText = (TextView) timerItem.getActionView();
+            timerText.setTextSize(30);
+
+            startTimer(10000, 1000);
+
+
+        return true;
+    }
 }

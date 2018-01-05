@@ -23,7 +23,9 @@
                 android:isScrollContainer="false"
                 android:numColumns="auto_fit"
                 android:stretchMode="columnWidth"
-                android:verticalSpacing="5dp" />
+                android:verticalSpacing="5dp"
+                android:listSelector="@drawable/my_gridlist_selector"
+                android:drawSelectorOnTop="true" />
 
 
             <TextSwitcher

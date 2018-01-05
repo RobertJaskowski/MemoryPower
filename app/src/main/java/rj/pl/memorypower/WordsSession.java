@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,6 +22,8 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.concurrent.TimeUnit;
 
 public class WordsSession extends Activity {
 
@@ -31,6 +36,8 @@ public class WordsSession extends Activity {
     private int stringIndex = 0;
     private TextView textView;
 
+    Button endButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +48,8 @@ public class WordsSession extends Activity {
 
         final ExpandableHeightGridView gridView = findViewById(R.id.gridViewWords);
         gridView.setExpanded(true);
+
+        gridView.setEnabled(false);
 
         final WordsAdapterAll wordsAdapterAll = new WordsAdapterAll(this, pickerValue);
 
@@ -54,31 +63,7 @@ public class WordsSession extends Activity {
         progressBar = findViewById(R.id.progressBar_words_session);
 
 
-//        //TODO temp button
-//        Button endbutton = view.findViewById(R.id.endSession);
-//
-//        endbutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Bundle bundleArray = new Bundle();
-//                bundleArray.putParcelableArrayList("bundleArray",list);
-//
-//                fragmentManager = getActivity().getFragmentManager();
-//                fragmentTransaction = fragmentManager.beginTransaction();
-//
-//
-//
-//                NumbersSessionEnd numbersSessionEnd = new NumbersSessionEnd();
-//
-//                numbersSessionEnd.setArguments(bundleArray);
-//
-//                fragmentTransaction.replace(R.id.main_container, numbersSessionEnd);
-//                fragmentTransaction.commit();
-//
-//
-//            }
-//        });
+
 
 
         progressBar.setMax(list.size());
@@ -91,16 +76,16 @@ public class WordsSession extends Activity {
 
                 {
 
-                    if (stringIndex == list.size() - 2) {
+                    if (stringIndex == list.size() - 1) {
 
                         if (progressBar.getProgress() != progressBar.getMax()) {
-                            textSwitcher.setText(String.valueOf(list.get(stringIndex).number) + "" + String.valueOf(list.get(stringIndex + 1).number));
+                            textSwitcher.setText(String.valueOf(list.get(stringIndex).word));
                         }
-                        progressBar.setProgress(stringIndex + 2);
+                        progressBar.setProgress(stringIndex + 1);
 
                     } else {
-                        textSwitcher.setText(String.valueOf(list.get(stringIndex).number) + "" + String.valueOf(list.get(stringIndex + 1).number));
-                        stringIndex += 2;
+                        textSwitcher.setText(String.valueOf(list.get(stringIndex).word));
+                        stringIndex += 1;
                         progressBar.setProgress(stringIndex);
 
                     }
@@ -122,22 +107,18 @@ public class WordsSession extends Activity {
             }
         });
 
-        textSwitcher.setText(String.valueOf(list.get(stringIndex).number) + "" + String.valueOf(list.get(stringIndex + 1).number));
-        stringIndex += 2;
+        textSwitcher.setText(String.valueOf(list.get(stringIndex).word));
+        stringIndex += 1;
         progressBar.setProgress(stringIndex);
-
-
-
 
 
         gridView.setAdapter(wordsAdapterAll);
 
 
-
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                wordsAdapterAll.setWchichOneId(i); TODO add this
+                wordsAdapterAll.setWchichOneId(i);
 
 
             }
@@ -147,8 +128,15 @@ public class WordsSession extends Activity {
         final Button buttonEndSessionInput = findViewById(R.id.endSessionInputWords);
         buttonEndSessionInput.setVisibility(View.INVISIBLE);
 
+        final ArrayList<String> words = new ArrayList<>(list.size());
+        for (int i = 0; i < list.size(); i++) {
+            words.add(list.get(i).word);
+        }
+        Collections.shuffle(words);
 
-        final Button endButton = findViewById(R.id.endSessionWords);
+
+
+        endButton = findViewById(R.id.endSessionWords);
         endButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,17 +145,16 @@ public class WordsSession extends Activity {
                 textSwitcher.setVisibility(View.GONE);
                 endButton.setVisibility(View.GONE);
 
+                gridView.setEnabled(true);
 
-//                wordsAdapterAll.setToNone(); TODO enable this
+                wordsAdapterAll.setToNone();
 
                 final RelativeLayout layout = findViewById(R.id.words_session_relativeMain);
                 final LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
 //                final View viewKeys = inflater.inflate(R.layout.session_number_inflation_keypad, (ViewGroup) findViewById(R.id.numbers_session_relativeMain));
 
 
-                final View viewKeys = inflater.inflate(R.layout.session_number_inflation_keypad,layout);
-
-
+                inflater.inflate(R.layout.session_number_inflation_keypad, layout);
 
 
                 final Button przyciskOneInkeypad = findViewById(R.id.przyciskOneInKeypad);
@@ -178,14 +165,9 @@ public class WordsSession extends Activity {
 //                przyciskOneInkeypad.setVisibility(View.GONE);
 
 
-
-                String[] numbers = new String[]{
-                        "0" ,"1", "2", "3", "4", "5", "6", "7", "8", "9"
-                };
-
                 final GridView gridViewKeypad = findViewById(R.id.gridViewKeypad);
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(WordsSession.this, R.layout.keypad_singleitem, numbers);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(WordsSession.this, R.layout.keypad_singleitem, words);
 //                gridViewKeypad.setBackgroundColor(getResources().getColor(R.color.lightGreen));
 
 
@@ -193,7 +175,9 @@ public class WordsSession extends Activity {
                 gridViewKeypad.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        itemClicked(i);
+
+                        TextView tv = view.findViewById(R.id.text1);
+                        itemClicked(((String) tv.getText()));
 
                     }
                 });
@@ -206,7 +190,8 @@ public class WordsSession extends Activity {
 
                         gridView.setClickable(false);
 
-                        buttonEndSessionInput.setVisibility(View.GONE);
+                        buttonEndSessionInput.setVisibility(View.INVISIBLE);
+
 
                         gridViewKeypad.setVisibility(View.GONE);
 
@@ -220,19 +205,18 @@ public class WordsSession extends Activity {
                         handlerr.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                int scoreE = wordsAdapterAll.getScoreE()-4;
+                                int scoreE = wordsAdapterAll.getScoreE() - 4;
                                 int scoreM = pickerValue;
 
-                                if (scoreE <= 0){
-                                    textViewInKeypad.setText(0+"/"+scoreM);
-                                }else{
-                                    textViewInKeypad.setText(scoreE+"/"+scoreM);
+                                if (scoreE <= 0) {
+                                    textViewInKeypad.setText(0 + "/" + scoreM);
+                                } else {
+                                    textViewInKeypad.setText(scoreE + "/" + scoreM);
                                 }
 
 
                             }
-                        },1000);
-
+                        }, 1000);
 
 
 //                        layout.removeView(viewKeys);
@@ -251,7 +235,7 @@ public class WordsSession extends Activity {
                     public void run() {
                         buttonEndSessionInput.setVisibility(View.VISIBLE);
                     }
-                },3000);
+                }, 3000);
 
 
             }
@@ -261,8 +245,8 @@ public class WordsSession extends Activity {
             }
 
 
-            //TODO
-            private void itemClicked(int i) {
+
+            private void itemClicked(String i) {
                 wordsAdapterAll.setInList(i);
 //                int start = gridView.getFirstVisiblePosition();
 //                for (int k = start, j = gridView.getLastVisiblePosition(); k <= j; k++) {
@@ -280,5 +264,41 @@ public class WordsSession extends Activity {
 
     }
 
+    private void startTimer(long duration, long interval){
+        CountDownTimer timer = new CountDownTimer(duration,interval) {
+            @Override
+            public void onTick(long l) {
+
+                timerText.setText(String.valueOf(TimeUnit.MILLISECONDS.toSeconds(l)));
+
+            }
+
+            @Override
+            public void onFinish() {
+                timerText.setVisibility(View.GONE);
+                timerText.setText("");
+
+                endButton.performClick();
+            }
+        };
+        timer.start();
     }
+
+    private TextView timerText;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+
+        MenuItem timerItem = menu.findItem(R.id.timer_session);
+        timerText = (TextView) timerItem.getActionView();
+        timerText.setTextSize(30);
+
+        startTimer(10000,1000);
+
+
+        return true;
+    }
+
+}
 

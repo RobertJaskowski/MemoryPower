@@ -15,7 +15,7 @@ public class MainActivity extends Activity {
         RecyclerView recyclerView = findViewById(R.id.main_recycler);
 
 
-        //todo change
+        //todo change icon
         int temp = R.drawable.ic_accessible_white_48dp;
 
         String[] menuNames = new String[]{"Numbers", "Words", "Cards", "Names", "5test", "Stats"};

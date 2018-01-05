@@ -12,7 +12,7 @@ tools:context="rj.pl.memorypower.WordsSession">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" android:layout_marginBottom="50dp">
 
         <rj.pl.memorypower.ExpandableHeightGridView
             android:id="@+id/gridViewWords"
@@ -23,7 +23,9 @@ tools:context="rj.pl.memorypower.WordsSession">
             android:isScrollContainer="false"
             android:numColumns="auto_fit"
             android:stretchMode="columnWidth"
-            android:verticalSpacing="5dp" />
+            android:verticalSpacing="5dp"
+            android:listSelector="@drawable/my_gridlist_selector"
+            android:drawSelectorOnTop="true" />
 
 
         <TextSwitcher
@@ -77,7 +79,7 @@ tools:context="rj.pl.memorypower.WordsSession">
             android:layout_centerHorizontal="true"
             android:background="@drawable/my_button_bg"
             android:text="@string/done"
-            android:layout_marginBottom="100dp"/>
+            android:layout_marginBottom="500dp"/>
     </RelativeLayout>
 </ScrollView>
 

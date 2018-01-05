@@ -53,7 +53,8 @@ public class WordsAdapterAll extends BaseAdapter {
 
 
         for (int i = 0; i < ile; i++) {
-            Words_item temp = new Words_item(i+1,new Random().nextInt(10));
+//            Log.e("a", String.valueOf(new Random().nextInt(9- 1 + 1) +1));
+            Words_item temp = new Words_item(i+1,new Random().nextInt(9 - 1 +1 )+1);
             list.add(temp);
             listCopiaStart.add(temp);
         }
@@ -131,16 +132,14 @@ public class WordsAdapterAll extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void setInList(int i) {
-
-        Log.e("setinList", String.valueOf(i));
-
-//        Words_item tempNumber = new Words_item(wchichOneId + 1, String.valueOf(i));
-//        list.set(wchichOneId, tempNumber);
-//        notifyDataSetChanged();
-//        if (wchichOneId < ile - 1) {
-//            wchichOneId++;
-//        }
+    public void setInList(String i) {
+        Log.e("numer", i);
+        Words_item tempNumber = new Words_item(wchichOneId + 1, i);
+        list.set(wchichOneId, tempNumber);
+        notifyDataSetChanged();
+        if (wchichOneId < ile - 1) {
+            wchichOneId++;
+        }
     }
 
     public void skonczonePokaz() {
