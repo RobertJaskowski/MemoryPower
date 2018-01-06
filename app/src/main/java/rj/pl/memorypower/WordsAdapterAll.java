@@ -133,7 +133,6 @@ public class WordsAdapterAll extends BaseAdapter {
     }
 
     public void setInList(String i) {
-        Log.e("numer", i);
         Words_item tempNumber = new Words_item(wchichOneId + 1, i);
         list.set(wchichOneId, tempNumber);
         notifyDataSetChanged();

@@ -6,6 +6,10 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
-public class WordsSession extends Activity {
+public class WordsSession extends Activity{
 
     public static final String EXTRA_PICKER = "picker";
 
@@ -37,6 +41,10 @@ public class WordsSession extends Activity {
     private TextView textView;
 
     Button endButton;
+
+    RecyclerView recyclerViewKeypad;
+
+    WordsAdapterKeypad wordsAdapterKeypad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +127,12 @@ public class WordsSession extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 wordsAdapterAll.setWchichOneId(i);
+                View viewItem = adapterView.getChildAt(i);
+                if(viewItem!=null){
+                    TextView textV = viewItem.findViewById(R.id.single_word_all_textView1);
+                    String text = (String) textV.getText();
+                    wordsAdapterKeypad.insert(text);
+                }
 
 
             }
@@ -154,33 +168,60 @@ public class WordsSession extends Activity {
 //                final View viewKeys = inflater.inflate(R.layout.session_number_inflation_keypad, (ViewGroup) findViewById(R.id.numbers_session_relativeMain));
 
 
-                inflater.inflate(R.layout.session_number_inflation_keypad, layout);
+                inflater.inflate(R.layout.session_word_inflation_keypad, layout);
 
 
-                final Button przyciskOneInkeypad = findViewById(R.id.przyciskOneInKeypad);
-                final Button przyciskTwoInKeypad = findViewById(R.id.przyciskTwoInKeypad);
-                final TextView textViewInKeypad = findViewById(R.id.textViewInKeypad);
-                final TextView textViewSaveScoreInKeypad = findViewById(R.id.textViewSaveScoreInKeypad);
+                final Button przyciskOneInkeypad = findViewById(R.id.przyciskOneInKeypadWord);
+                final Button przyciskTwoInKeypad = findViewById(R.id.przyciskTwoInKeypadWord);
+                final TextView textViewInKeypad = findViewById(R.id.textViewInKeypadWord);
+                final TextView textViewSaveScoreInKeypad = findViewById(R.id.textViewSaveScoreInKeypadWord);
+
+
+
+                timer.cancel();
+                timerText.setVisibility(View.GONE);
+                timerText.setText("");
 
 //                przyciskOneInkeypad.setVisibility(View.GONE);
 
 
-                final GridView gridViewKeypad = findViewById(R.id.gridViewKeypad);
+                recyclerViewKeypad = findViewById(R.id.wordKeypadRecycler);
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(WordsSession.this, R.layout.keypad_singleitem, words);
-//                gridViewKeypad.setBackgroundColor(getResources().getColor(R.color.lightGreen));
+                wordsAdapterKeypad = new WordsAdapterKeypad(WordsSession.this,words);
 
 
-                gridViewKeypad.setAdapter(adapter);
-                gridViewKeypad.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+//                recyclerViewKeypad.setLayoutManager(new LinearLayoutManager(WordsSession.this,LinearLayoutManager.HORIZONTAL,false));
+
+                recyclerViewKeypad.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.HORIZONTAL));
+                recyclerViewKeypad.setAdapter(wordsAdapterKeypad);
+
+                wordsAdapterKeypad.setListener(new WordsAdapterKeypad.Listener() {
                     @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                        TextView tv = view.findViewById(R.id.text1);
-                        itemClicked(((String) tv.getText()));
-
+                    public void OnClick(String text) {
+                        wordsAdapterAll.setInList(text);
                     }
                 });
+
+
+
+                //TODO last version
+//                ArrayAdapter<String> adapter = new ArrayAdapter<>(WordsSession.this, R.layout.keypad_singleitem, words);
+
+
+
+
+
+//                gridViewKeypad.setAdapter(adapter);
+//                gridViewKeypad.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//                        TextView tv = view.findViewById(R.id.text1);
+//                        itemClicked(((String) tv.getText()));
+//
+//                    }
+//                });
 
 
                 buttonEndSessionInput.setOnClickListener(new View.OnClickListener() {
@@ -192,8 +233,10 @@ public class WordsSession extends Activity {
 
                         buttonEndSessionInput.setVisibility(View.INVISIBLE);
 
+                        //TODO last version
+//                        gridViewKeypad.setVisibility(View.GONE);
 
-                        gridViewKeypad.setVisibility(View.GONE);
+                        recyclerViewKeypad.setVisibility(View.GONE);
 
 
                         przyciskOneInkeypad.setVisibility(View.VISIBLE);
@@ -246,17 +289,17 @@ public class WordsSession extends Activity {
 
 
 
-            private void itemClicked(String i) {
-                wordsAdapterAll.setInList(i);
-//                int start = gridView.getFirstVisiblePosition();
-//                for (int k = start, j = gridView.getLastVisiblePosition(); k <= j; k++) {
-//                    if (i == gridView.getItemIdAtPosition(k)) {
-//                        View view = gridView.getChildAt(k - start);
-//                        gridView.getAdapter().getView(k, view, gridView);
-//                        break;
-//                    }
-//                }
-            }
+//            private void itemClicked(String i) {
+//                wordsAdapterAll.setInList(i);
+////                int start = gridView.getFirstVisiblePosition();
+////                for (int k = start, j = gridView.getLastVisiblePosition(); k <= j; k++) {
+////                    if (i == gridView.getItemIdAtPosition(k)) {
+////                        View view = gridView.getChildAt(k - start);
+////                        gridView.getAdapter().getView(k, view, gridView);
+////                        break;
+////                    }
+////                }
+//            }
 
 
         });
@@ -264,13 +307,14 @@ public class WordsSession extends Activity {
 
     }
 
+    CountDownTimer timer;
+
     private void startTimer(long duration, long interval){
-        CountDownTimer timer = new CountDownTimer(duration,interval) {
+         timer = new CountDownTimer(duration,interval) {
             @Override
             public void onTick(long l) {
 
-                timerText.setText(String.valueOf(TimeUnit.MILLISECONDS.toSeconds(l)));
-
+                    timerText.setText(String.valueOf(TimeUnit.MILLISECONDS.toSeconds(l)));
             }
 
             @Override
@@ -285,6 +329,7 @@ public class WordsSession extends Activity {
     }
 
     private TextView timerText;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

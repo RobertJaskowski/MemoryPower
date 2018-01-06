@@ -7,16 +7,16 @@
     android:background="@color/colorPrimary">
 
 
-    <GridView
-    android:id="@+id/gridViewKeypad"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:numColumns="5">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/wordKeypadRecycler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="horizontal">
 
-    </GridView>
+    </android.support.v7.widget.RecyclerView>
 
     <Button
-        android:id="@+id/przyciskOneInKeypad"
+        android:id="@+id/przyciskOneInKeypadWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -26,7 +26,7 @@
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/textViewInKeypad"
+        android:id="@+id/textViewInKeypadWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -36,15 +36,15 @@
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/textViewSaveScoreInKeypad"
+        android:id="@+id/textViewSaveScoreInKeypadWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="@string/save_score"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <Button
-        android:id="@+id/przyciskTwoInKeypad"
+        android:id="@+id/przyciskTwoInKeypadWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -55,6 +55,6 @@
         android:visibility="gone" />
 
 
-
+    <!--fragment-->
 
 </RelativeLayout>
