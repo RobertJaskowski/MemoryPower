@@ -7,7 +7,7 @@ package rj.pl.memorypower;
 public class Words {
 
 
-    private String[] words = new String[]{" ","asd1","asddd2","asddd3","asddd4","asddd5","asddd6","asddd7","asdd8","asddd99"};
+    private String[] words = new String[]{" ","Cat","Dog","Giraffe","Dancing","Running","Eating","Flying","Panter","Glass","Milk","Fighting","Pen","Hagrid","Car","Learning","Reading","Weather","Bike","Mouse","Coding"};
 
     public String getWords(int i) {
         return words[i];

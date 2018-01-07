@@ -7,7 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class WordsIntro extends Activity {
+
+    @BindView(R.id.WNumber_picker)
     NumberPicker numberPicker;
     int numberPickerValue;
 
@@ -21,6 +27,8 @@ public class WordsIntro extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_words_intro);
 
+        ButterKnife.bind(this);
+
         values = new String[24];
 
         int n = 4;
@@ -29,29 +37,23 @@ public class WordsIntro extends Activity {
             n += 2;
 
         }
-        numberPicker = findViewById(R.id.WNumber_picker);
+
         numberPicker.setMinValue(0);
         numberPicker.setMaxValue(values.length - 1);
         numberPicker.setWrapSelectorWheel(false);
 
 
-
         numberPicker.setDisplayedValues(values);
 
+    }
 
-        Button btn = findViewById(R.id.StartWordsSession);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                numberPickerValue = numberPicker.getValue() * 2 + 4;
+    @OnClick(R.id.StartWordsSession)
+    void startWordsSession() {
 
-                Intent intent = new Intent(view.getContext(), WordsSession.class);
-                intent.putExtra("picker", numberPickerValue);
-                startActivity(intent);
+        numberPickerValue = numberPicker.getValue() * 2 + 4;
 
-
-            }
-        });
-
+        Intent intent = new Intent(this, WordsSession.class);
+        intent.putExtra("picker", numberPickerValue);
+        startActivity(intent);
     }
 }

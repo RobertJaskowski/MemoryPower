@@ -2,18 +2,23 @@ package rj.pl.memorypower;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 
 /**
- * Created by Robert on 05.01.2018 - 09:56.
+ * Created  by Robert on 05.01.2018 - 09:56.
  */
 
-public class WordsAdapterKeypad extends RecyclerView.Adapter<WordsAdapterKeypad.MyViewHolder>{
+public class WordsAdapterKeypad extends RecyclerView.Adapter<WordsAdapterKeypad.MyViewHolder> {
 
     Context context;
     ArrayList<String> words;
@@ -21,28 +26,27 @@ public class WordsAdapterKeypad extends RecyclerView.Adapter<WordsAdapterKeypad.
     LayoutInflater infalter;
 
 
-    public void setListener(Listener listener) {
-        this.listener = listener;
-    }
-
-    private Listener listener;
-
-    public static interface Listener{
-        public void OnClick(String text);
-    }
-
     public WordsAdapterKeypad(Context context, ArrayList<String> words) {
         this.context = context;
         this.words = words;
 
         infalter = LayoutInflater.from(context);
+
+        EventBus.getDefault().register(this);
+
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void addFromMain(MessageEventWordsInsertToKeypad event) {
+        insert(event.getText());
     }
 
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int position) {
 
-        View view = infalter.inflate(R.layout.keypad_word_item,parent,false);
+        View view = infalter.inflate(R.layout.keypad_word_item, parent, false);
 
         MyViewHolder holder = new MyViewHolder(view);
 
@@ -72,19 +76,19 @@ public class WordsAdapterKeypad extends RecyclerView.Adapter<WordsAdapterKeypad.
 
         @Override
         public void onClick(View view) {
-            if(listener!=null) {
-                listener.OnClick((String) textView.getText());
-                delete(getLayoutPosition());
-            }
+            EventBus.getDefault().post(new MessageEventWords((String) textView.getText()));
+            delete(getLayoutPosition());
+
         }
     }
 
-    public void delete(int position){
+    public void delete(int position) {
         words.remove(position);
         notifyItemRemoved(position);
     }
-    public void insert(String text){
+
+    public void insert(String text) {
         words.add(text);
-        notifyItemInserted(words.size()-1);
+        notifyItemInserted(words.size() - 1);
     }
 }

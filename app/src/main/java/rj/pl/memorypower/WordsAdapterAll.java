@@ -1,17 +1,22 @@
 package rj.pl.memorypower;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Created by Robert on 03.01.2018 - 09:56.
+ * Created  by Robert on 03.01.2018 - 09:56.
  */
 
 public class WordsAdapterAll extends BaseAdapter {
@@ -21,7 +26,7 @@ public class WordsAdapterAll extends BaseAdapter {
 
     private ArrayList<Words_item> list;
 
-    public ArrayList<Words_item> getList() {
+    ArrayList<Words_item> getList() {
         return list;
     }
 
@@ -39,13 +44,13 @@ public class WordsAdapterAll extends BaseAdapter {
         return scoreE;
     }
 
-    private int scoreM = 0;
 
-    public WordsAdapterAll(Context c,int ile) {
+
+    public WordsAdapterAll(Context c, int ile) {
         this.context = c;
         this.ile = ile;
 
-        scoreM = ile;
+
 
         list = new ArrayList<>();
         listCopiaStart = new ArrayList<>();
@@ -53,12 +58,42 @@ public class WordsAdapterAll extends BaseAdapter {
 
         for (int i = 0; i < ile; i++) {
 //            Log.e("a", String.valueOf(new Random().nextInt(9- 1 + 1) +1));
-            Words_item temp = new Words_item(i+1,new Random().nextInt(9 - 1 +1 )+1);
+            Words_item temp = new Words_item(i + 1, new Random().nextInt(20 - 1 + 1) + 1);
             list.add(temp);
             listCopiaStart.add(temp);
         }
 
+        EventBus.getDefault().register(this);
+
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void setInListEvent(MessageEventWords event) {
+        if (!list.get(wchichOneId ).word.equals(" ")){
+                addToKeypadEvent();
+        }
+        Words_item tempNumber = new Words_item(wchichOneId + 1, event.getText());
+        list.set(wchichOneId, tempNumber);
+        notifyDataSetChanged();
+        if (wchichOneId < ile - 1) {
+            wchichOneId++;
+        }
+    }
+    public void addToKeypadEvent(){
+        EventBus.getDefault().post(new MessageEventWordsInsertToKeypad(list.get(wchichOneId).word));
+    }
+
+    private void countScores(){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).word.equals(listCopiaStart.get(i).word)){
+                scoreE++;
+                Log.d("score:","");
+            }
+        }
+    }
+
+
+
 
     @Override
     public int getCount() {
@@ -74,12 +109,14 @@ public class WordsAdapterAll extends BaseAdapter {
     public long getItemId(int i) {
         return i;
     }
+
     private class ViewHolder {
 
 
         TextView textView1;
 
         TextView textView2;
+
         ViewHolder(View v) {
             textView1 = v.findViewById(R.id.single_word_all_textView1);
             textView2 = v.findViewById(R.id.single_word_all_textView2);
@@ -108,10 +145,10 @@ public class WordsAdapterAll extends BaseAdapter {
         } else {
             Words_item temp = list.get(i);
             Words_item tempStart = listCopiaStart.get(i);
-            if (temp.word.equals(tempStart.word)){
+            if (temp.word.equals(tempStart.word)) {
                 view.setBackgroundResource(R.color.lightGreen);
-                scoreE++;
-            }else {
+
+            } else {
                 view.setBackgroundResource(R.color.lightDark);
                 holder.textView2.setText(tempStart.word);
                 holder.textView2.setTextColor(view.getResources().getColor(R.color.lightGreen));
@@ -131,17 +168,19 @@ public class WordsAdapterAll extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void setInList(String i) {
-        Words_item tempNumber = new Words_item(wchichOneId + 1, i);
-        list.set(wchichOneId, tempNumber);
-        notifyDataSetChanged();
-        if (wchichOneId < ile - 1) {
-            wchichOneId++;
-        }
-    }
+
+//    public void setInList(String i) {
+//        Words_item tempNumber = new Words_item(wchichOneId + 1, i);
+//        list.set(wchichOneId, tempNumber);
+//        notifyDataSetChanged();
+//        if (wchichOneId < ile - 1) {
+//            wchichOneId++;
+//        }
+//    }
 
     public void skonczonePokaz() {
         canContinue = true;
+        countScores();
         notifyDataSetChanged();
     }
 
