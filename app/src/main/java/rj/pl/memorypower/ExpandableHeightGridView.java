@@ -6,13 +6,13 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 
 /**
- * Created by PC on 31.12.2017.
+ * Created by Robert on 31.12.2017 - 09:45.
  */
 
 public class ExpandableHeightGridView extends GridView
 {
 
-    boolean expanded = false;
+    private boolean expanded = false;
 
     public ExpandableHeightGridView(Context context)
     {
@@ -30,7 +30,7 @@ public class ExpandableHeightGridView extends GridView
         super(context, attrs, defStyle);
     }
 
-    public boolean isExpanded()
+    private boolean isExpanded()
     {
         return expanded;
     }

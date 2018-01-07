@@ -19,7 +19,7 @@
         <activity android:name=".NumbersIntro" />
         <activity android:name=".NumbersSession" />
         <activity android:name=".WordsIntro" />
-        <activity android:name=".WordsSession"></activity>
+        <activity android:name=".WordsSession" />
     </application>
 
 </manifest>

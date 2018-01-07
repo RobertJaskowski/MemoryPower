@@ -29,10 +29,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindString;
+
 public class WordsSession extends Activity{
 
     public static final String EXTRA_PICKER = "picker";
 
+    @BindString(R.string.slash)
+    String slash;
     int pickerValue;
     private TextSwitcher textSwitcher;
     private Button nextButton;
@@ -205,23 +209,7 @@ public class WordsSession extends Activity{
 
 
 
-                //TODO last version
-//                ArrayAdapter<String> adapter = new ArrayAdapter<>(WordsSession.this, R.layout.keypad_singleitem, words);
 
-
-
-
-
-//                gridViewKeypad.setAdapter(adapter);
-//                gridViewKeypad.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//
-//                        TextView tv = view.findViewById(R.id.text1);
-//                        itemClicked(((String) tv.getText()));
-//
-//                    }
-//                });
 
 
                 buttonEndSessionInput.setOnClickListener(new View.OnClickListener() {
@@ -233,8 +221,7 @@ public class WordsSession extends Activity{
 
                         buttonEndSessionInput.setVisibility(View.INVISIBLE);
 
-                        //TODO last version
-//                        gridViewKeypad.setVisibility(View.GONE);
+
 
                         recyclerViewKeypad.setVisibility(View.GONE);
 
@@ -252,9 +239,10 @@ public class WordsSession extends Activity{
                                 int scoreM = pickerValue;
 
                                 if (scoreE <= 0) {
-                                    textViewInKeypad.setText(0 + "/" + scoreM);
+                                    textViewInKeypad.setText(String.format("0"+slash+"%d",scoreM));
                                 } else {
-                                    textViewInKeypad.setText(scoreE + "/" + scoreM);
+                                    //TODO null couse not binded view
+                                    textViewInKeypad.setText(String.format(scoreE+slash+"%d",scoreM));
                                 }
 
 

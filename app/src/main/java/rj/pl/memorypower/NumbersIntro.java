@@ -3,24 +3,31 @@ package rj.pl.memorypower;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.NumberPicker;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class NumbersIntro extends Activity {
 
+    @BindView(R.id.NNumber_picker)
     NumberPicker numberPicker;
-    int numberPickerValue;
+    private int numberPickerValue;
+
+
 
     /**
      * for number picker
      */
-    String[] values;
+    private String[] values;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numbers_intro);
+
+        ButterKnife.bind(this);
 
 
         values = new String[24];
@@ -31,7 +38,7 @@ public class NumbersIntro extends Activity {
             n += 2;
 
         }
-        numberPicker = findViewById(R.id.NNumber_picker);
+
         numberPicker.setMinValue(0);
         numberPicker.setMaxValue(values.length - 1);
         numberPicker.setWrapSelectorWheel(false);
@@ -41,18 +48,14 @@ public class NumbersIntro extends Activity {
         numberPicker.setDisplayedValues(values);
 
 
-        Button btn = findViewById(R.id.StartNumberSession);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                numberPickerValue = numberPicker.getValue() * 2 + 4;
+    }
 
-                Intent intent = new Intent(view.getContext(),NumbersSession.class);
-                intent.putExtra("picker",numberPickerValue);
-                startActivity(intent);
+    @OnClick(R.id.startNumberSession)
+    public void startNumberSession(){
+        numberPickerValue = numberPicker.getValue() * 2 + 4;
 
-
-            }
-        });
+        Intent intent = new Intent(this,NumbersSession.class);
+        intent.putExtra("picker",numberPickerValue);
+        startActivity(intent);
     }
 }

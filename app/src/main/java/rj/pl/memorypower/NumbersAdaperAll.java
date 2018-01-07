@@ -1,6 +1,7 @@
 package rj.pl.memorypower;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Random;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
- * Created by PC on 31.12.2017.
+ *  Created by Robert on 31.12.2017.
  */
 
 class NumbersAdapterAll extends BaseAdapter {
@@ -38,9 +42,8 @@ class NumbersAdapterAll extends BaseAdapter {
 
 
     private int scoreE = 0;
-    private int scoreM = 0;
 
-    public int getScoreE() {
+    int getScoreE() {
         return scoreE;
     }
 
@@ -52,7 +55,6 @@ class NumbersAdapterAll extends BaseAdapter {
         list = new ArrayList<>();
         listaCopiaStart = new ArrayList<>();
 
-        scoreM = ile;
 
 
         for (int i = 0; i < ile; i++) {
@@ -62,11 +64,16 @@ class NumbersAdapterAll extends BaseAdapter {
         }
 
 
-//        for (int i = 0; i < list.size(); i++) {
-//            Log.e("asd", list.get(i).number + " : " + listaCopiaStart.get(i).number);
-//        }
 
+    }
 
+    private void countScores(){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).number.equals(listaCopiaStart.get(i).number)){
+                scoreE++;
+                Log.d("score:","");
+            }
+        }
     }
 
 
@@ -86,15 +93,14 @@ class NumbersAdapterAll extends BaseAdapter {
         return i;
     }
 
-    private class ViewHolder {
+     class ViewHolder {
 
-
+        @BindView(R.id.single_number_all_textView1)
         TextView textView1;
-
+        @BindView(R.id.single_number_all_textView2)
         TextView textView2;
         ViewHolder(View v) {
-            textView1 = v.findViewById(R.id.single_number_all_textView1);
-            textView2 = v.findViewById(R.id.single_number_all_textView2);
+            ButterKnife.bind(this,v);
         }
 
     }
@@ -105,8 +111,10 @@ class NumbersAdapterAll extends BaseAdapter {
 
         if (row == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            if (inflater!=null)
             row = inflater.inflate(R.layout.single_number_all, viewGroup, false);
             holder = new ViewHolder(row);
+            if (row!=null)
             row.setTag(holder);
         } else {
             holder = (ViewHolder) row.getTag();
@@ -121,7 +129,7 @@ class NumbersAdapterAll extends BaseAdapter {
             Number_item tempStart = listaCopiaStart.get(i);
             if (temp.number.equals(tempStart.number)){
                 view.setBackgroundResource(R.color.lightGreen);
-                scoreE++;
+//                scoreE++;
 
             }else {
                 view.setBackgroundResource(R.color.lightDark);
@@ -135,7 +143,7 @@ class NumbersAdapterAll extends BaseAdapter {
     }
 
 
-    public void setToNone() {
+    void setToNone() {
         for (int i = 0; i < ile; i++) {
             Number_item tempNumber = new Number_item(i + 1, " ");
             list.set(i, tempNumber);
@@ -144,7 +152,7 @@ class NumbersAdapterAll extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void setInList(int i) {
+    void setInList(int i) {
 
         Number_item tempNumber = new Number_item(wchichOneId + 1, String.valueOf(i));
         list.set(wchichOneId, tempNumber);
@@ -154,12 +162,13 @@ class NumbersAdapterAll extends BaseAdapter {
         }
     }
 
-    public void skonczonePokaz() {
+    void skonczonePokaz() {
         canContinue = true;
+        countScores();
         notifyDataSetChanged();
     }
 
-    public void setWchichOneId(int wchichOneId) {
+    void setWchichOneId(int wchichOneId) {
         this.wchichOneId = wchichOneId;
         Number_item tempNumber = new Number_item(wchichOneId + 1, " ");
         list.set(wchichOneId, tempNumber);

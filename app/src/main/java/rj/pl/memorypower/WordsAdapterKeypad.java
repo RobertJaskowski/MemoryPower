@@ -2,7 +2,6 @@ package rj.pl.memorypower;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by PC on 05.01.2018.
+ * Created by Robert on 05.01.2018 - 09:56.
  */
 
 public class WordsAdapterKeypad extends RecyclerView.Adapter<WordsAdapterKeypad.MyViewHolder>{
@@ -67,7 +66,7 @@ public class WordsAdapterKeypad extends RecyclerView.Adapter<WordsAdapterKeypad.
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            textView = (TextView)itemView.findViewById(R.id.WordKeypadText1);
+            textView = itemView.findViewById(R.id.WordKeypadText1);
             textView.setOnClickListener(this);
         }
 

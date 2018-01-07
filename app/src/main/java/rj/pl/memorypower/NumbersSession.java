@@ -24,99 +24,114 @@ import android.widget.ViewSwitcher;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindColor;
+import butterknife.BindString;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class NumbersSession extends Activity {
 
+    @SuppressWarnings("WeakerAccess")
     public static final String EXTRA_PICKER = "picker";
 
-    int pickerValue;
-    private TextSwitcher textSwitcher;
-    private Button nextButton;
-    private ProgressBar progressBar;
-    private int stringIndex = 0;
+
+    private int pickerValue;
+
+    @BindView(R.id.text_switcher)
+    TextSwitcher textSwitcher;
+
+    @BindView(R.id.sessionButton_TextSwitcher)
+    Button nextButton;
+    @BindView(R.id.progressBar_number_session)
+    ProgressBar progressBar;
+
+    @BindView(R.id.gridView)
+    ExpandableHeightGridView gridView;
+
+    @BindColor(R.color.colorAccent)
+    int colorAccent;
+
+    @BindView(R.id.endSessionInput)
+    Button buttonEndSessionInput;
+
+
+    @BindView(R.id.endSession)
+    Button endSession;
+
+    class laterInflationViewsPack {
+        @BindView(R.id.przyciskOneInKeypad)
+        Button przyciskOneInkeypad;
+        @BindView(R.id.przyciskTwoInKeypad)
+        Button przyciskTwoInKeypad;
+
+
+        @BindView(R.id.textViewInKeypad)
+        TextView textViewInKeypad;
+
+        @BindView(R.id.textViewSaveScoreInKeypad)
+        TextView textViewSaveScoreInKeypad;
+
+        @BindView(R.id.gridViewKeypad)
+        GridView gridViewKeypad;
+    }
+
+    laterInflationViewsPack laterInflationViews;
+    View viewInflated;
+
+
+    @BindView(R.id.numbers_session_relativeMain)
+    RelativeLayout layout;
+
+    @BindString(R.string.slash)
+    String slash;
+
+    private ArrayAdapter<String> adapter;
+
+    private NumbersAdapterAll numbersAdapterAll;
+
+    private ArrayList<Number_item> list;
+
+    /**
+     * dynamically generated TextView
+     */
     private TextView textView;
 
-    Button endButton;
+    private int stringIndex = 0;
+
+    private CountDownTimer timer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numbers_session);
 
+        ButterKnife.bind(this);
+
+
+        //noinspection ConstantConditions
         pickerValue = (int) getIntent().getExtras().get(EXTRA_PICKER);
 
 
-        final ExpandableHeightGridView gridView = findViewById(R.id.gridView);
         gridView.setExpanded(true);
 
         gridView.setEnabled(false);
 
-        final NumbersAdapterAll numbersAdapterAll = new NumbersAdapterAll(this, pickerValue);
+        numbersAdapterAll = new NumbersAdapterAll(this, pickerValue);
 
-        final ArrayList<Number_item> list = numbersAdapterAll.getList();
-
-
-        //setting Text Switcher
-
-        textSwitcher = findViewById(R.id.text_switcher);
-        nextButton = findViewById(R.id.sessionButton_TextSwitcher);
-        progressBar = findViewById(R.id.progressBar_number_session);
-
-
-
+        list = numbersAdapterAll.getList();
 
 
         progressBar.setMax(list.size());
-        progressBar.getProgressDrawable().setColorFilter(Color.parseColor("#f05545"), PorterDuff.Mode.SRC_IN);
+        progressBar.getProgressDrawable().setColorFilter(colorAccent, PorterDuff.Mode.SRC_IN);
 
-
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //comment used when want to start over textswitcher
-//                if (stringIndex == list.size()) {
-//                    Log.d("DUPA", String.valueOf(list.size()));
-//
-//                    stringIndex = 0;
-//                    textSwitcher.setText(String.valueOf(list.get(stringIndex).number) + "" + String.valueOf(list.get(stringIndex + 1).number));
-//                    stringIndex += 2;
-//                    progressBar.setProgress(stringIndex);
-//                }
-//                 else if (stringIndex == list.size() - 2) {
-//
-//                    Log.d("kupa", String.valueOf(list.size()));
-//
-//                    textSwitcher.setText(String.valueOf(list.get(stringIndex).number) + "" + String.valueOf(list.get(stringIndex + 1).number) + ".");
-//                    stringIndex += 2;
-//
-//
-//                }
-//                else
-                {
-
-                    if (stringIndex == list.size() - 2) {
-
-                        if (progressBar.getProgress() != progressBar.getMax()) {
-                            textSwitcher.setText(String.valueOf(list.get(stringIndex).number) + "" + String.valueOf(list.get(stringIndex + 1).number));
-                        }
-                        progressBar.setProgress(stringIndex + 2);
-
-                    } else {
-                        textSwitcher.setText(String.valueOf(list.get(stringIndex).number) + "" + String.valueOf(list.get(stringIndex + 1).number));
-                        stringIndex += 2;
-                        progressBar.setProgress(stringIndex);
-
-                    }
-                }
-
-            }
-        });
 
         textSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
             public View makeView() {
                 textView = new TextView(NumbersSession.this);
-                textView.setBackgroundColor(Color.parseColor("#f05545"));
+                textView.setBackgroundColor(colorAccent);
                 textView.setTextColor(Color.WHITE);
                 textView.setTextSize(40);
                 textView.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -125,16 +140,13 @@ public class NumbersSession extends Activity {
             }
         });
 
+
         textSwitcher.setText(String.valueOf(list.get(stringIndex).number) + "" + String.valueOf(list.get(stringIndex + 1).number));
         stringIndex += 2;
         progressBar.setProgress(stringIndex);
 
 
-
-
-
         gridView.setAdapter(numbersAdapterAll);
-
 
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -147,151 +159,148 @@ public class NumbersSession extends Activity {
         });
 
 
-        final Button buttonEndSessionInput = findViewById(R.id.endSessionInput);
         buttonEndSessionInput.setVisibility(View.INVISIBLE);
+        laterInflationViews = new laterInflationViewsPack();
+
+    }
+
+    @OnClick(R.id.sessionButton_TextSwitcher)
+    public void onClick() {
 
 
-        endButton = findViewById(R.id.endSession);
-        endButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                nextButton.setVisibility(View.GONE);
-                progressBar.setVisibility(View.GONE);
-                textSwitcher.setVisibility(View.GONE);
-                endButton.setVisibility(View.GONE);
+        if (stringIndex == list.size() - 2) {
 
-                gridView.setEnabled(true);
-
-
-                numbersAdapterAll.setToNone();
-
-                final RelativeLayout layout = findViewById(R.id.numbers_session_relativeMain);
-                final LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-//                final View viewKeys = inflater.inflate(R.layout.session_number_inflation_keypad, (ViewGroup) findViewById(R.id.numbers_session_relativeMain));
-
-
-                inflater.inflate(R.layout.session_number_inflation_keypad,layout);
-
-
-
-
-                final Button przyciskOneInkeypad = findViewById(R.id.przyciskOneInKeypad);
-                final Button przyciskTwoInKeypad = findViewById(R.id.przyciskTwoInKeypad);
-                final TextView textViewInKeypad = findViewById(R.id.textViewInKeypad);
-                final TextView textViewSaveScoreInKeypad = findViewById(R.id.textViewSaveScoreInKeypad);
-
-//                przyciskOneInkeypad.setVisibility(View.GONE);
-
-
-
-                String[] numbers = new String[]{
-                        "0" ,"1", "2", "3", "4", "5", "6", "7", "8", "9"
-                };
-
-                final GridView gridViewKeypad = findViewById(R.id.gridViewKeypad);
-
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(NumbersSession.this, R.layout.keypad_singleitem, numbers);
-//                gridViewKeypad.setBackgroundColor(getResources().getColor(R.color.lightGreen));
-
-
-                gridViewKeypad.setAdapter(adapter);
-                gridViewKeypad.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        itemClicked(i);
-
-                    }
-                });
-
-
-                buttonEndSessionInput.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        sesjaSkonczonaPokaz();
-
-                        gridView.setClickable(false);
-
-                        buttonEndSessionInput.setVisibility(View.GONE);
-
-                        gridViewKeypad.setVisibility(View.GONE);
-
-
-                        przyciskOneInkeypad.setVisibility(View.VISIBLE);
-                        przyciskTwoInKeypad.setVisibility(View.VISIBLE);
-                        textViewInKeypad.setVisibility(View.VISIBLE);
-                        textViewSaveScoreInKeypad.setVisibility(View.VISIBLE);
-
-                        Handler handlerr = new Handler();
-                        handlerr.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                int scoreE = numbersAdapterAll.getScoreE()-4;
-                                int scoreM = pickerValue;
-
-                                if (scoreE <= 0){
-                                    textViewInKeypad.setText(0+"/"+scoreM);
-                                }else{
-                                    textViewInKeypad.setText(scoreE+"/"+scoreM);
-                                }
-
-
-                            }
-                        },1000);
-
-
-
-//                        layout.removeView(viewKeys);
-
-                        //viewKeys.setVisibility(View.INVISIBLE);
-//                        ViewGroup parent = (ViewGroup) viewKeys.getParent();
-//                        parent.removeView(viewKeys);
-
-                    }
-
-                });
-
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        buttonEndSessionInput.setVisibility(View.VISIBLE);
-                    }
-                },3000);
-
-
+            if (progressBar.getProgress() != progressBar.getMax()) {
+                textSwitcher.setText(String.valueOf(list.get(stringIndex).number) + "" + String.valueOf(list.get(stringIndex + 1).number));
             }
+            progressBar.setProgress(stringIndex + 2);
 
-            private void sesjaSkonczonaPokaz() {
-                numbersAdapterAll.skonczonePokaz();
-            }
+        } else {
+            textSwitcher.setText(String.valueOf(list.get(stringIndex).number) + "" + String.valueOf(list.get(stringIndex + 1).number));
+            stringIndex += 2;
+            progressBar.setProgress(stringIndex);
 
-
-
-            private void itemClicked(int i) {
-                numbersAdapterAll.setInList(i);
-//                int start = gridView.getFirstVisiblePosition();
-//                for (int k = start, j = gridView.getLastVisiblePosition(); k <= j; k++) {
-//                    if (i == gridView.getItemIdAtPosition(k)) {
-//                        View view = gridView.getChildAt(k - start);
-//                        gridView.getAdapter().getView(k, view, gridView);
-//                        break;
-//                    }
-//                }
-            }
-
-
-        });
+        }
 
 
     }
 
-    private void startTimer(long duration, long interval){
-        CountDownTimer timer = new CountDownTimer(duration,interval) {
+    @OnClick(R.id.endSession)
+    void endSession() {
+
+        nextButton.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
+        textSwitcher.setVisibility(View.GONE);
+        endSession.setVisibility(View.GONE);
+
+        gridView.setEnabled(true);
+
+
+        numbersAdapterAll.setToNone();
+
+
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        if (inflater != null)
+            viewInflated = inflater.inflate(R.layout.session_number_inflation_keypad, layout);
+
+
+        timer.cancel();
+        timerText.setVisibility(View.GONE);
+        timerText.setText("");
+
+
+        String[] numbers = new String[]{
+                "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
+        };
+
+
+        adapter = new ArrayAdapter<>(NumbersSession.this, R.layout.keypad_singleitem, numbers);
+
+
+        ButterKnife.bind(laterInflationViews, viewInflated);
+
+        laterInflationViews.gridViewKeypad.setAdapter(adapter);
+
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                buttonEndSessionInput.setVisibility(View.VISIBLE);
+            }
+        }, 3000);
+
+
+        bindClickEvents();
+
+
+    }
+
+    /**
+     * Binds clicks for keypad after binding butterknife
+     */
+    private void bindClickEvents() {
+        laterInflationViews.gridViewKeypad.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                itemClicked(i);
+
+            }
+        });
+    }
+
+    @OnClick(R.id.endSessionInput)
+    public void endSessionInput() {
+        sesjaSkonczonaPokaz();
+
+        gridView.setClickable(false);
+
+        buttonEndSessionInput.setVisibility(View.GONE);
+
+        laterInflationViews.gridViewKeypad.setVisibility(View.GONE);
+
+
+        laterInflationViews.przyciskOneInkeypad.setVisibility(View.VISIBLE);
+        laterInflationViews.przyciskTwoInKeypad.setVisibility(View.VISIBLE);
+        laterInflationViews.textViewInKeypad.setVisibility(View.VISIBLE);
+        laterInflationViews.textViewSaveScoreInKeypad.setVisibility(View.VISIBLE);
+
+        Handler handlerr = new Handler();
+        handlerr.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int scoreE = numbersAdapterAll.getScoreE();
+                int scoreM = pickerValue;
+
+                if (scoreE <= 0) {
+//                    laterInflationViews.textViewInKeypad.setText(0 + slash + scoreM);
+                    laterInflationViews.textViewInKeypad.setText(String.format("0"+slash+"%d",scoreM));
+
+                } else {
+                    laterInflationViews.textViewInKeypad.setText(String.format(scoreE+slash+"%d",scoreM));
+                }
+
+
+            }
+        }, 1000);
+
+    }
+
+    private void itemClicked(int i) {
+        numbersAdapterAll.setInList(i);
+    }
+
+    private void sesjaSkonczonaPokaz() {
+        numbersAdapterAll.skonczonePokaz();
+    }
+
+
+    private void startTimer() {
+        timer = new CountDownTimer(10000, 1000) {
             @Override
             public void onTick(long l) {
-
                 timerText.setText(String.valueOf(TimeUnit.MILLISECONDS.toSeconds(l)));
-
             }
 
             @Override
@@ -299,7 +308,7 @@ public class NumbersSession extends Activity {
                 timerText.setVisibility(View.GONE);
                 timerText.setText("");
 
-                endButton.performClick();
+                endSession.performClick();
             }
         };
         timer.start();
@@ -309,14 +318,14 @@ public class NumbersSession extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
 
 
-            MenuItem timerItem = menu.findItem(R.id.timer_session);
-            timerText = (TextView) timerItem.getActionView();
-            timerText.setTextSize(30);
+        MenuItem timerItem = menu.findItem(R.id.timer_session);
+        timerText = (TextView) timerItem.getActionView();
+        timerText.setTextSize(30);
 
-            startTimer(10000, 1000);
+        startTimer();
 
 
         return true;

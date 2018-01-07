@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by PC on 03.01.2018.
+ * Created by Robert on 03.01.2018 - 09:56.
  */
 
 public class Words_item implements Parcelable {

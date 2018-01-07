@@ -10,26 +10,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * Created by PC on 30.12.2017.
- */
+
 
 class CardAdapterMain extends RecyclerView.Adapter<CardAdapterMain.ViewHolder> {
 
-    private  String[] captions;
-    private int[] imageIds;
+    private String[] captions;
+    private Drawable[] imageIds;
 
-    public CardAdapterMain(String[] captions, int[] imageIds) {
+    CardAdapterMain(String[] captions, Drawable[] imageIds) {
         this.captions = captions;
         this.imageIds = imageIds;
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;
 
-        public ViewHolder(CardView v) {
+        ViewHolder(CardView v) {
             super(v);
             cardView = v;
         }
@@ -37,46 +36,52 @@ class CardAdapterMain extends RecyclerView.Adapter<CardAdapterMain.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        CardView cv = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.card_menu, parent,false );
+        CardView cv = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.card_menu, parent, false);
 
         return new ViewHolder(cv);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         CardView cardView = holder.cardView;
         ImageView imageView = cardView.findViewById(R.id.info_image);
-        Drawable drawable = cardView.getResources().getDrawable(imageIds[position]);//TODO DEPRECIATION
-        imageView.setImageDrawable(drawable);
+        imageView.setImageDrawable(imageIds[position]);
         imageView.setContentDescription(captions[position]);
         TextView textView = cardView.findViewById(R.id.info_text);
         textView.setText(captions[position]);
-
 
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = null;
-                if(position==0){
-                    intent = new Intent(view.getContext(),NumbersIntro.class);
+                switch (holder.getAdapterPosition()) {
+                    case 0:
+                        intent = new Intent(view.getContext(), NumbersIntro.class);
+                        break;
+                    case 1:
+                        intent = new Intent(view.getContext(), WordsIntro.class);
+                        break;
+                    case 2:
+                        intent = new Intent(view.getContext(), NumbersIntro.class);
+                        break;
+                    case 3:
+                        intent = new Intent(view.getContext(), NumbersIntro.class);
+                        break;
+                    case 4:
+                        intent = new Intent(view.getContext(), NumbersIntro.class);
+                        break;
+                    case 5:
+                        intent = new Intent(view.getContext(), NumbersIntro.class);
+                        break;
+
                 }
-                if(position==1){
-                    intent = new Intent(view.getContext(),WordsIntro.class);
+
+                if (intent!=null){
+                    view.getContext().startActivity(intent);
+                }else{
+                    Toast.makeText(view.getContext().getApplicationContext(),"Error choose again",Toast.LENGTH_SHORT).show();
                 }
-                if(position==2){
-//                    intent = new Intent(view.getContext(),NumbersIntro.class);
-                }
-                if(position==3){
-                    intent = new Intent(view.getContext(),NumbersIntro.class);
-                }
-                if(position==4){
-//                    intent = new Intent(view.getContext(),NumbersIntro.class);
-                }
-                if(position==5){
-//                    intent = new Intent(view.getContext(),NumbersIntro.class);
-                }
-                view.getContext().startActivity(intent);
             }
         });
 

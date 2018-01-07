@@ -1,9 +1,7 @@
 package rj.pl.memorypower;
 
-import java.util.ArrayList;
-
 /**
- * Created by PC on 03.01.2018.
+ * Created by Robert on 03.01.2018 - 09:56.
  */
 
 public class Words {

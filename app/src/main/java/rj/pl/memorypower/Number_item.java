@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by PC on 31.12.2017.
+ * Created by Robert on 31.12.2017 - 09:56.
  */
 
 public class Number_item implements Parcelable {
@@ -20,7 +20,7 @@ public class Number_item implements Parcelable {
 //        this.number = number;
 //    }
 
-    protected Number_item(Parcel in) {
+    private Number_item(Parcel in) {
         id = in.readInt();
         number = in.readString();
     }

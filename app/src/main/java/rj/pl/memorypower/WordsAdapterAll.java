@@ -1,7 +1,6 @@
 package rj.pl.memorypower;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Created by PC on 03.01.2018.
+ * Created by Robert on 03.01.2018 - 09:56.
  */
 
 public class WordsAdapterAll extends BaseAdapter {
