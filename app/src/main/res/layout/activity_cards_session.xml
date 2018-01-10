@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/words_session_relativeMain"
+    android:id="@+id/cards_session_relativeMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="rj.pl.memorypower.WordsSession">
+    tools:context="rj.pl.memorypower.CardsSession">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,7 +18,7 @@
             android:layout_marginBottom="50dp">
 
             <rj.pl.memorypower.ExpandableHeightGridView
-                android:id="@+id/gridViewWords"
+                android:id="@+id/gridViewCards"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawSelectorOnTop="true"
@@ -25,33 +26,33 @@
                 android:horizontalSpacing="4dp"
                 android:isScrollContainer="false"
                 android:listSelector="@drawable/my_gridlist_selector"
-                android:numColumns="auto_fit"
+                android:numColumns="1"
                 android:stretchMode="columnWidth"
                 android:verticalSpacing="5dp" />
 
 
             <TextSwitcher
-                android:id="@+id/text_switcher_words"
+                android:id="@+id/text_switcher_cards"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/gridViewWords"
+                android:layout_below="@id/gridViewCards"
                 android:layout_marginTop="20dp"
                 android:inAnimation="@android:anim/slide_in_left"
                 android:outAnimation="@android:anim/slide_out_right" />
 
             <ProgressBar
-                android:id="@+id/progressBar_words_session"
+                android:id="@+id/progressBar_cards_session"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/text_switcher_words" />
+                android:layout_below="@id/text_switcher_cards" />
 
 
             <Button
-                android:id="@+id/sessionButton_TextSwitcher_words"
+                android:id="@+id/sessionButton_TextSwitcher_cards"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/progressBar_words_session"
+                android:layout_below="@id/progressBar_cards_session"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/my_button_bg"
@@ -60,10 +61,10 @@
                 android:text="@string/next" />
 
             <Button
-                android:id="@+id/endSessionWords"
+                android:id="@+id/endSessionCards"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/sessionButton_TextSwitcher_words"
+                android:layout_below="@id/sessionButton_TextSwitcher_cards"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/my_button_bg"
@@ -71,10 +72,10 @@
                 android:text="@string/end" />
 
             <Button
-                android:id="@+id/endSessionInputWords"
+                android:id="@+id/endSessionInputCards"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/endSessionWords"
+                android:layout_below="@id/endSessionCards"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="200dp"
                 android:layout_marginTop="5dp"
@@ -84,6 +85,5 @@
                 android:text="@string/done" />
         </RelativeLayout>
     </ScrollView>
-
 
 </RelativeLayout>

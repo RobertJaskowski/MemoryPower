@@ -9,9 +9,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class WordsIntro extends Activity {
+public class CardsIntro extends Activity {
 
-    @BindView(R.id.WNumber_picker)
+    @BindView(R.id.CNumber_picker)
     NumberPicker numberPicker;
     int numberPickerValue;
 
@@ -23,7 +23,7 @@ public class WordsIntro extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_words_intro);
+        setContentView(R.layout.activity_cards_intro);
 
         ButterKnife.bind(this);
 
@@ -45,13 +45,15 @@ public class WordsIntro extends Activity {
 
     }
 
-    @OnClick(R.id.StartWordsSession)
+    @OnClick(R.id.StartCardsSession)
     void startWordsSession() {
 
         numberPickerValue = numberPicker.getValue() * 2 + 4;
 
-        Intent intent = new Intent(this, WordsSession.class);
+        Intent intent = new Intent(this, CardsSession.class);
         intent.putExtra("picker", numberPickerValue);
         startActivity(intent);
     }
+
+
 }

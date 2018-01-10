@@ -8,7 +8,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:largeHeap="true">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +21,10 @@
         <activity android:name=".NumbersSession" />
         <activity android:name=".WordsIntro" />
         <activity android:name=".WordsSession" />
+        <activity android:name=".NamesIntro" />
+        <activity android:name=".NamesSession" />
+        <activity android:name=".CardsIntro" />
+        <activity android:name=".CardsSession"/>
     </application>
 
 </manifest>
