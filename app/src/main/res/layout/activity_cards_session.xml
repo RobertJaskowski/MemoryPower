@@ -31,40 +31,42 @@
                 android:verticalSpacing="5dp" />
 
 
-            <TextSwitcher
-                android:id="@+id/text_switcher_cards"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/gridViewCards"
-                android:layout_marginTop="20dp"
-                android:inAnimation="@android:anim/slide_in_left"
-                android:outAnimation="@android:anim/slide_out_right" />
-
-            <ProgressBar
-                android:id="@+id/progressBar_cards_session"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/text_switcher_cards" />
 
 
-            <Button
-                android:id="@+id/sessionButton_TextSwitcher_cards"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/progressBar_cards_session"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/my_button_bg"
-                android:minWidth="183dp"
-                android:padding="5dp"
-                android:text="@string/next" />
+            <!--<TextSwitcher-->
+            <!--android:id="@+id/text_switcher_cards"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/gridViewCards"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:inAnimation="@android:anim/slide_in_left"-->
+            <!--android:outAnimation="@android:anim/slide_out_right" />-->
+
+            <!--<ProgressBar-->
+                <!--android:id="@+id/progressBar_cards_session"-->
+                <!--style="?android:attr/progressBarStyleHorizontal"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@id/imageSwitcher_cards" />-->
+
+
+            <!--<Button-->
+                <!--android:id="@+id/sessionButton_TextSwitcher_cards"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@id/progressBar_cards_session"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginBottom="20dp"-->
+                <!--android:background="@drawable/my_button_bg"-->
+                <!--android:minWidth="183dp"-->
+                <!--android:padding="5dp"-->
+                <!--android:text="@string/next" />-->
 
             <Button
                 android:id="@+id/endSessionCards"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/sessionButton_TextSwitcher_cards"
+                android:layout_below="@id/gridViewCards"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/my_button_bg"

@@ -2,10 +2,14 @@ package rj.pl.memorypower;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -13,15 +17,18 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
+import jp.wasabeef.picasso.transformations.CropTransformation;
+
 /**
  * Created  by Robert on 09.01.2018 - 19:57.
  */
 
-public class CardsAdapterKeypad extends RecyclerView.Adapter<CardsAdapterKeypad.MyViewHolder>{
+public class CardsAdapterKeypad extends RecyclerView.Adapter<CardsAdapterKeypad.MyViewHolder> {
     Context context;
     ArrayList<Integer> cards;
 
     LayoutInflater infalter;
+
     public CardsAdapterKeypad(Context context, ArrayList<Integer> cards) {
         this.context = context;
         this.cards = cards;
@@ -30,11 +37,19 @@ public class CardsAdapterKeypad extends RecyclerView.Adapter<CardsAdapterKeypad.
 
         EventBus.getDefault().register(this);
 
+        for (Integer l : cards) {
+            Log.e("test", l.toString());
+
+        }
+
+
+
 
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void addFromMain(MessageEventIntInsertToKeypad event) {
+        Log.e("kepadadapterAddFrSub", String.valueOf(event.getId()));
         insert(event.getId());
     }
 
@@ -51,7 +66,17 @@ public class CardsAdapterKeypad extends RecyclerView.Adapter<CardsAdapterKeypad.
 
     @Override
     public void onBindViewHolder(CardsAdapterKeypad.MyViewHolder myViewHolder, int position) {
-        myViewHolder.textView.setText(cards.get(position));
+//        myViewHolder.textView.setText(cards.get(position));
+        MyTag myTag = new MyTag("asd", cards.get(position), "asd");
+
+        Picasso
+                .with(context)
+                .load(cards.get(position))
+                .transform(new CropTransformation(150, 80, CropTransformation.GravityHorizontal.LEFT, CropTransformation.GravityVertical.TOP))
+                .into(myViewHolder.imageView);
+
+        myViewHolder.imageView.setTag(myTag);
+
     }
 
     @Override
@@ -61,19 +86,27 @@ public class CardsAdapterKeypad extends RecyclerView.Adapter<CardsAdapterKeypad.
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView textView;
+        //        TextView textView;
+        ImageView imageView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            textView = itemView.findViewById(R.id.CardKeypadText1);
-            textView.setOnClickListener(this);
+            imageView = itemView.findViewById(R.id.CardKeypadImg1);
+            imageView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
 
-            EventBus.getDefault().post(new MessageEventInt(Integer.parseInt(textView.getText().toString())));
+//            EventBus.getDefault().post(new MessageEventInt(Integer.parseInt(textView.getText().toString())));
+//            EventBus.getDefault().post(new MessageEventInt(imageView.getTag());//todo get position ???? of list will see
+
+
+            MyTag myTag = (MyTag) view.getTag();
+            EventBus.getDefault().post(new MessageEventInt(myTag.image));
+            Log.e("kepadonclickid", String.valueOf(view.getId()));//this bad, not used
+            Log.e("kepadonclick", String.valueOf(myTag.image));
             delete(getLayoutPosition());
 
         }
@@ -88,4 +121,8 @@ public class CardsAdapterKeypad extends RecyclerView.Adapter<CardsAdapterKeypad.
         cards.add(integer);
         notifyItemInserted(cards.size() - 1);
     }
+
+
+
+
 }
