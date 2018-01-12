@@ -23,7 +23,8 @@
         android:minWidth="100dp"
         android:text="@string/no"
         android:textColor="@color/dark"
-        android:visibility="gone" />
+        android:visibility="gone"
+        />
 
     <TextView
         android:id="@+id/textViewInKeypad"

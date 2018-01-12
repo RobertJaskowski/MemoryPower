@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,14 +19,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".NumbersIntro" />
-        <activity android:name=".NumbersSession" />
+        <activity android:name=".NumbersSession" android:screenOrientation="portrait"/>
         <activity android:name=".WordsIntro" />
-        <activity android:name=".WordsSession" />
-        <activity android:name=".NamesIntro" />
-        <activity android:name=".NamesSession" />
+        <activity android:name=".WordsSession" android:screenOrientation="portrait"/>
+        <activity android:name=".NamesIntro"  />
+        <activity android:name=".NamesSession" android:screenOrientation="portrait"/>
         <activity android:name=".CardsIntro" />
-        <activity android:name=".CardsSession" />
-        <activity android:name=".Stats"></activity>
+        <activity android:name=".CardsSession" android:screenOrientation="portrait"/>
+        <activity android:name=".Stats"/>
     </application>
 
 </manifest>

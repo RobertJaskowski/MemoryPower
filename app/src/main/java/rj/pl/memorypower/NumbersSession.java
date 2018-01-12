@@ -19,9 +19,11 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindColor;
@@ -58,6 +60,7 @@ public class NumbersSession extends Activity {
 
     @BindView(R.id.endSession)
     Button endSession;
+
 
     class laterInflationViewsPack {
         @BindView(R.id.przyciskOneInKeypad)
@@ -100,6 +103,9 @@ public class NumbersSession extends Activity {
     private int stringIndex = 0;
 
     private CountDownTimer timer;
+
+    private int timerAchived = 0;
+    private TextView timerText;
 
 
     @Override
@@ -261,31 +267,56 @@ public class NumbersSession extends Activity {
         laterInflationViews.gridViewKeypad.setVisibility(View.GONE);
 
 
+
+        int scoreE = numbersAdapterAll.getScoreE();
+        int scoreM = pickerValue;
+
+
         laterInflationViews.przyciskOneInkeypad.setVisibility(View.VISIBLE);
+        if (scoreE>3)//dont allow if less than 3 database is not a trashcan, todo in other classes and fields timer to add
         laterInflationViews.przyciskTwoInKeypad.setVisibility(View.VISIBLE);
+
         laterInflationViews.textViewInKeypad.setVisibility(View.VISIBLE);
         laterInflationViews.textViewSaveScoreInKeypad.setVisibility(View.VISIBLE);
 
-        Handler handlerr = new Handler();
-        handlerr.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                int scoreE = numbersAdapterAll.getScoreE();
-                int scoreM = pickerValue;
-
-                if (scoreE <= 0) {
-//                    laterInflationViews.textViewInKeypad.setText(0 + slash + scoreM);
-                    laterInflationViews.textViewInKeypad.setText(String.format("0"+slash+"%d",scoreM));
-
-                } else {
-                    laterInflationViews.textViewInKeypad.setText(String.format(scoreE+slash+"%d",scoreM));
-                }
 
 
-            }
-        }, 1000);
+
+        if (scoreE <= 0) {
+            laterInflationViews.textViewInKeypad.setText(String.format("0" + slash + "%d", scoreM));
+
+        } else {
+            laterInflationViews.textViewInKeypad.setText(String.format(scoreE + slash + "%d", scoreM));
+        }
+
+
+//        Handler handlerr = new Handler();  //handler not needed anymore , count scores always is first
+//        handlerr.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                int scoreE = numbersAdapterAll.getScoreE();
+//                int scoreM = pickerValue;
+//
+//                if (scoreE <= 0) {
+////                    laterInflationViews.textViewInKeypad.setText(0 + slash + scoreM);
+//                    laterInflationViews.textViewInKeypad.setText(String.format("0" + slash + "%d", scoreM));
+//
+//                } else {
+//                    laterInflationViews.textViewInKeypad.setText(String.format(scoreE + slash + "%d", scoreM));
+//                }
+//
+//
+//            }
+//        }, 1000);
+
+        ButtonAfterSession buttonAfterSession = new ButtonAfterSession(this, "numbers", scoreE, scoreM, timerAchived);
+
+
+        laterInflationViews.przyciskOneInkeypad.setOnClickListener(buttonAfterSession);
+        laterInflationViews.przyciskTwoInKeypad.setOnClickListener(buttonAfterSession);
 
     }
+
 
     private void itemClicked(int i) {
         numbersAdapterAll.setInList(i);
@@ -301,6 +332,7 @@ public class NumbersSession extends Activity {
             @Override
             public void onTick(long l) {
                 timerText.setText(String.valueOf(TimeUnit.MILLISECONDS.toSeconds(l)));
+                timerAchived++; //for sending how much time has passed in when clicked
             }
 
             @Override
@@ -314,7 +346,7 @@ public class NumbersSession extends Activity {
         timer.start();
     }
 
-    private TextView timerText;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
