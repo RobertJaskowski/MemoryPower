@@ -43,8 +43,6 @@ public class CardsAdapterKeypad extends RecyclerView.Adapter<CardsAdapterKeypad.
         }
 
 
-
-
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -100,14 +98,19 @@ public class CardsAdapterKeypad extends RecyclerView.Adapter<CardsAdapterKeypad.
         public void onClick(View view) {
 
 //            EventBus.getDefault().post(new MessageEventInt(Integer.parseInt(textView.getText().toString())));
-//            EventBus.getDefault().post(new MessageEventInt(imageView.getTag());//todo get position ???? of list will see
+//            EventBus.getDefault().post(new MessageEventInt(imageView.getTag());//
 
 
-            MyTag myTag = (MyTag) view.getTag();
-            EventBus.getDefault().post(new MessageEventInt(myTag.image));
-            Log.e("kepadonclickid", String.valueOf(view.getId()));//this bad, not used
-            Log.e("kepadonclick", String.valueOf(myTag.image));
-            delete(getLayoutPosition());
+            if (getLayoutPosition() >= 0) {
+                MyTag myTag = (MyTag) view.getTag();
+                EventBus.getDefault().post(new MessageEventInt(myTag.image));
+                Log.e("kepadonclickid", String.valueOf(view.getId()));//this bad, not used
+                Log.e("kepadonclick", String.valueOf(myTag.image));
+                delete(getLayoutPosition());
+            }else{
+                Log.e("minus1", String.valueOf(getLayoutPosition()));
+            }
+
 
         }
     }
@@ -121,8 +124,6 @@ public class CardsAdapterKeypad extends RecyclerView.Adapter<CardsAdapterKeypad.
         cards.add(integer);
         notifyItemInserted(cards.size() - 1);
     }
-
-
 
 
 }

@@ -58,7 +58,6 @@ public class CardsSession extends Activity {
 //    ImageSwitcher imageSwitcher;
 
 
-
 //    @BindView(R.id.sessionButton_TextSwitcher_cards)
 //    Button nextButton;
 
@@ -71,7 +70,7 @@ public class CardsSession extends Activity {
     @BindView(R.id.endSessionCards)
     Button endSessionCards;
 
-    class laterInflationViewsPack{
+    class laterInflationViewsPack {
         @BindView(R.id.przyciskOneInKeypadWord)
         Button przyciskOneInkeypad;
         @BindView(R.id.przyciskTwoInKeypadWord)
@@ -86,6 +85,7 @@ public class CardsSession extends Activity {
         @BindView(R.id.textViewSaveScoreInKeypadWord)
         TextView textViewSaveScoreInKeypad;
     }
+
     CardsSession.laterInflationViewsPack laterInflationViews;
     View viewInflated;
 
@@ -127,8 +127,6 @@ public class CardsSession extends Activity {
 //        progressBar.getProgressDrawable().setColorFilter(colorAccent, PorterDuff.Mode.SRC_IN);
 
 
-
-
 //        textSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
 //            @Override
 //            public View makeView() {
@@ -166,7 +164,10 @@ public class CardsSession extends Activity {
 //                    cardsAdapterKeypad.insert(myTag.image);
                     tag = (MyTagTwo) viewItem.getTag(R.id.TAG_ONLINE);
                     Log.e("cardssesGrOnclick", String.valueOf(tag.image));
-                    EventBus.getDefault().post(new MessageEventIntInsertToKeypad(tag.image));
+                    if (tag.image != R.drawable.card0) {
+                        EventBus.getDefault().post(new MessageEventIntInsertToKeypad(tag.image));
+                    }
+
                 }
 
 
@@ -203,7 +204,7 @@ public class CardsSession extends Activity {
 //                final View viewKeys = inflater.inflate(R.layout.session_number_inflation_keypad, (ViewGroup) findViewById(R.id.numbers_session_relativeMain));
 
 
-        if(inflater!=null)
+        if (inflater != null)
             viewInflated = inflater.inflate(R.layout.session_word_inflation_keypad, layout);
 
         timer.cancel();
@@ -212,14 +213,12 @@ public class CardsSession extends Activity {
 
 //                przyciskOneInkeypad.setVisibility(View.GONE);
 
-        ButterKnife.bind(laterInflationViews,viewInflated);
+        ButterKnife.bind(laterInflationViews, viewInflated);
 
 
 //        laterInflationViews.recyclerViewKeypad = findViewById(R.id.wordKeypadRecycler);
 
         cardsAdapterKeypad = new CardsAdapterKeypad(CardsSession.this, words);
-
-
 
 
         laterInflationViews.recyclerViewKeypad.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL));

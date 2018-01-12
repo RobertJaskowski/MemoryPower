@@ -84,7 +84,7 @@ public class CardsAdapterAll extends BaseAdapter {
     public void setInListEvent(MessageEventInt event) {
         Log.e("adapterAll", String.valueOf(list.get(wchichOneId).card)+" " + R.drawable.card0+" " + event.getId());
         if (list.get(wchichOneId ).card != R.drawable.card0){
-
+            Log.e("dodaje do adapteraall","do adaptera");
             addToKeypadEvent();
         }
         Cards_item tempNumber = new Cards_item(wchichOneId + 1, event.getId(),0);
