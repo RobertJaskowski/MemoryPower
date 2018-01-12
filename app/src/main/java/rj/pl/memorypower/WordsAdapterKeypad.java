@@ -76,8 +76,10 @@ public class WordsAdapterKeypad extends RecyclerView.Adapter<WordsAdapterKeypad.
 
         @Override
         public void onClick(View view) {
-            EventBus.getDefault().post(new MessageEventWords((String) textView.getText()));
-            delete(getLayoutPosition());
+            if (getLayoutPosition() >= 0) {
+                EventBus.getDefault().post(new MessageEventWords((String) textView.getText()));
+                delete(getLayoutPosition());
+            }
 
         }
     }

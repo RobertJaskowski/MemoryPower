@@ -7,14 +7,14 @@
     tools:context="rj.pl.memorypower.WordsIntro">
 
     <Button
-        android:id="@+id/StartWordsSession"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:background="@drawable/my_button_bg"
-        android:text="@string/start"
-        android:textAppearance="?android:textAppearanceLarge"/>
+    android:id="@+id/StartWordsSession"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:padding="10dp"
+    android:background="@drawable/my_button_bg"
+    android:text="@string/start"
+    android:textAppearance="?android:textAppearanceLarge"/>
 
 
     <NumberPicker

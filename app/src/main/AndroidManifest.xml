@@ -6,6 +6,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -20,6 +21,11 @@
         <activity android:name=".NumbersSession" />
         <activity android:name=".WordsIntro" />
         <activity android:name=".WordsSession" />
+        <activity android:name=".NamesIntro" />
+        <activity android:name=".NamesSession" />
+        <activity android:name=".CardsIntro" />
+        <activity android:name=".CardsSession" />
+        <activity android:name=".Stats"></activity>
     </application>
 
 </manifest>
