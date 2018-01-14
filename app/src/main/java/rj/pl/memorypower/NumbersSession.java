@@ -309,7 +309,7 @@ public class NumbersSession extends Activity {
 //            }
 //        }, 1000);
 
-        ButtonAfterSession buttonAfterSession = new ButtonAfterSession(this, "numbers", scoreE, scoreM, timerAchived);
+        ButtonAfterSession buttonAfterSession = new ButtonAfterSession(this, 0, scoreE, scoreM, timerAchived);
 
 
         laterInflationViews.przyciskOneInkeypad.setOnClickListener(buttonAfterSession);

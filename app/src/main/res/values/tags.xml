@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="TAG_ONLINE" type="id"/>
-    <item name="Tag_holder" type="id"/>
+    <item name="TAG_ONLINE" type="id" />
+    <item name="Tag_holder" type="id" />
+    <string-array name="types">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+
+
+    </string-array>
 </resources>

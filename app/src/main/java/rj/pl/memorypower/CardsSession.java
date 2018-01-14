@@ -91,8 +91,8 @@ public class CardsSession extends Activity {
 
     int pickerValue;
 
-    private int stringIndex = 0;
-    private TextView textView;
+//    private int stringIndex = 0;
+//    private TextView textView;
 
 
     CardsAdapterAll cardsAdapterAll;

@@ -1,9 +1,6 @@
 package rj.pl.memorypower;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -17,10 +14,9 @@ import java.util.Calendar;
 public class ButtonAfterSession implements View.OnClickListener {
 
     Context context;
-    private String typeSession;
+    private int typeSession;
     private int scoreE;
     private int scoreM;
-    private int whenAchived;
     private int timeSpent;
 
     private int day;
@@ -33,15 +29,19 @@ public class ButtonAfterSession implements View.OnClickListener {
     @Override
     public String toString() {
         return "ButtonAfterSession{" +
-                "typeSession='" + typeSession + '\'' +
+                "context=" + context +
+                ", typeSession=" + typeSession +
                 ", scoreE=" + scoreE +
                 ", scoreM=" + scoreM +
-                ", whenAchived=" + whenAchived +
                 ", timeSpent=" + timeSpent +
+                ", day=" + day +
+                ", month=" + month +
+                ", year=" + year +
+                ", helper=" + helper +
                 '}';
     }
 
-    public ButtonAfterSession(Context context, String typeSession, int scoreE, int scoreM, int timeSpent) {
+    public ButtonAfterSession(Context context, int typeSession, int scoreE, int scoreM, int timeSpent) {
         this.context = context;
         this.typeSession = typeSession;
         this.scoreE = scoreE;
@@ -89,12 +89,28 @@ public class ButtonAfterSession implements View.OnClickListener {
 
     private void insertRecord() {
 
-        long id = helper.insertRecord(typeSession, scoreE, scoreM, day, month, year, timeSpent);
-        if (id < 0) {
-            Toast.makeText(context, "failure", Toast.LENGTH_SHORT).show();
+
+        long it = helper.checkIfExist(typeSession, day);
+        if (it < 1) {
+
+            long id = helper.insertRecord(typeSession, scoreE, scoreM, day, month, year, timeSpent);
+
+
+            if (id < 0) {
+                Toast.makeText(context, "failure addin", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "success addin", Toast.LENGTH_SHORT).show();
+            }
         } else {
-            Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+            long id = helper.updateRecord(typeSession,scoreE,scoreM,day,month,year,timeSpent);
+            if (id < 0) {
+                Toast.makeText(context, "failure updatin", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "success updatin", Toast.LENGTH_SHORT).show();
+            }
+
         }
+
 
     }
 

@@ -8,11 +8,24 @@
     <color name="colorPrimaryDark">#7f0000</color>
     <color name="dark">#212121</color>
     <color name="lightDark">#424242</color>
-    <color name="lightGreen">#AED581</color>
+
 
 
     <color name="secondaryDarkColor">#7f0000</color>
     <color name="primaryTextColor">#ffffff</color>
+
+    <color name="lightGreen">#AED581</color>
+    <color name="darkGreen">#33691E</color>
+    <color name="blue">#1E88E5</color>
+    <color name="darkBlue">#0D47A1</color>
+    <color name="orange">#E64A19</color>
+    <color name="darkOrange">#BF360C</color>
+    <color name="yellow">#FFC400</color>
+    <color name="darkYellow">#FFAB00</color>
+    <color name="purple">#6A1B9A</color>
+    <color name="darkPurple">#4A148C</color>
+    
+    
     <!--<color name="secondaryTextColor">#ffffff</color>-->
 
 </resources>
