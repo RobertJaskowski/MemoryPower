@@ -162,7 +162,7 @@ public class Stats extends Activity {
             Log.e("temp test", "higher that or eq to 2");
 
             List<ILineDataSet> dataSets = new ArrayList<>();
-            dataSets.clear(); //todo check it
+            dataSets.clear();
 
             for (int i = 0; i < 4; i++) {
                 if (getDataSetInLineData(dbHasDataCheck) != null) {
@@ -235,7 +235,7 @@ public class Stats extends Activity {
 
 
         Legend legend = chart.getLegend();
-        legend.setTextSize(25);
+        legend.setTextSize(15);
         legend.setTextColor(primaryTextColor);
         legend.setYEntrySpace(15);
         legend.setFormSize(15);

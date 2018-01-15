@@ -86,6 +86,10 @@ public class WordsSession extends Activity {
     ArrayList<Words_item> list;
     ArrayList<String> words;
 
+    private TextView timerText;
+
+    private int timerAchived=0;
+
 
 
     WordsAdapterKeypad wordsAdapterKeypad;
@@ -195,13 +199,6 @@ public class WordsSession extends Activity {
 
         wordsAdapterKeypad = new WordsAdapterKeypad(WordsSession.this, words);
 
-
-
-
-        laterInflationViews.recyclerViewKeypad.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL));
-        laterInflationViews.recyclerViewKeypad.setAdapter(wordsAdapterKeypad);
-
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -209,6 +206,13 @@ public class WordsSession extends Activity {
                 buttonEndSessionInput.setVisibility(View.VISIBLE);
             }
         }, 3000);
+
+
+        laterInflationViews.recyclerViewKeypad.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL));
+        laterInflationViews.recyclerViewKeypad.setAdapter(wordsAdapterKeypad);
+
+
+
     }
 
     @OnClick(R.id.endSessionInputWords)
@@ -219,32 +223,40 @@ public class WordsSession extends Activity {
 
         buttonEndSessionInput.setVisibility(View.INVISIBLE);
 
+        int scoreE = wordsAdapterAll.getScoreE();
+        int scoreM = pickerValue;
 
         laterInflationViews.recyclerViewKeypad.setVisibility(View.GONE);
 
 
         laterInflationViews.przyciskOneInkeypad.setVisibility(View.VISIBLE);
+        if(scoreE>3)
         laterInflationViews.przyciskTwoInKeypad.setVisibility(View.VISIBLE);
+
         laterInflationViews.textViewInKeypad.setVisibility(View.VISIBLE);
         laterInflationViews.textViewSaveScoreInKeypad.setVisibility(View.VISIBLE);
 
-        Handler handlerr = new Handler();
-        handlerr.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                int scoreE = wordsAdapterAll.getScoreE();
-                int scoreM = pickerValue;
+
+
+
 
                 if (scoreE <= 0) {
                     laterInflationViews.textViewInKeypad.setText(String.format("0" + slash + "%d", scoreM));
                 } else {
-                    //TODO null couse not binded view
+
                     laterInflationViews.textViewInKeypad.setText(String.format(scoreE + slash + "%d", scoreM));
                 }
 
 
-            }
-        }, 1000);
+        ButtonAfterSession buttonAfterSession = new ButtonAfterSession(this, 1, scoreE, scoreM, timerAchived);
+
+
+
+
+        laterInflationViews.przyciskOneInkeypad.setOnClickListener(buttonAfterSession);
+        laterInflationViews.przyciskTwoInKeypad.setOnClickListener(buttonAfterSession);
+
+
     }
 
     private void sesjaSkonczonaPokaz() {
@@ -276,6 +288,7 @@ public class WordsSession extends Activity {
             public void onTick(long l) {
 
                 timerText.setText(String.valueOf(TimeUnit.MILLISECONDS.toSeconds(l)));
+                timerAchived++;
             }
 
             @Override
@@ -289,7 +302,7 @@ public class WordsSession extends Activity {
         timer.start();
     }
 
-    private TextView timerText;
+
 
 
     @Override
@@ -309,7 +322,9 @@ public class WordsSession extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
+        if (EventBus.getDefault().isRegistered(wordsAdapterAll))
         EventBus.getDefault().unregister(wordsAdapterAll);
+        if (EventBus.getDefault().isRegistered(wordsAdapterKeypad))
         EventBus.getDefault().unregister(wordsAdapterKeypad);
     }
 }

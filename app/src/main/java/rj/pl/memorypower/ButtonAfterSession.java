@@ -61,6 +61,31 @@ public class ButtonAfterSession implements View.OnClickListener {
                 Log.e("button one clicked", "clk");
 //                Toast.makeText(context, toString(), Toast.LENGTH_LONG).show();
 
+                String messageTemp = helper.getAllData();
+
+                Log.e("tag", messageTemp);
+
+                Toast.makeText(context, messageTemp, Toast.LENGTH_LONG).show();
+
+                break;
+            case R.id.przyciskTwoInKeypad://Save - place saving here
+
+                getCalendar();
+
+
+                Log.e("button two clicked", "clk");
+
+
+//                new InsertRecordTask().execute();
+
+                insertRecord();
+
+                break;
+
+            case (R.id.przyciskOneInKeypadWord)://no - place back to main here
+                Log.e("button one clicked", "clk");
+//                Toast.makeText(context, toString(), Toast.LENGTH_LONG).show();
+
                 String message = helper.getAllData();
 
                 Log.e("tag", message);
@@ -68,12 +93,9 @@ public class ButtonAfterSession implements View.OnClickListener {
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
                 break;
-            case R.id.przyciskTwoInKeypad://Save - place saving here
+            case R.id.przyciskTwoInKeypadWord://Save - place saving here
 
-                Calendar calendar = Calendar.getInstance();
-                day = calendar.get(Calendar.DATE);
-                month = calendar.get(Calendar.MONTH);
-                year = calendar.get(Calendar.YEAR);
+                getCalendar();
 
 
                 Log.e("button two clicked", "clk");
@@ -85,6 +107,13 @@ public class ButtonAfterSession implements View.OnClickListener {
 
                 break;
         }
+    }
+
+    void getCalendar() {
+        Calendar calendar = Calendar.getInstance();
+        day = calendar.get(Calendar.DATE);
+        month = calendar.get(Calendar.MONTH);
+        year = calendar.get(Calendar.YEAR);
     }
 
     private void insertRecord() {

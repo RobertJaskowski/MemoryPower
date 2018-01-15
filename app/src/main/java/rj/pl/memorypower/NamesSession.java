@@ -87,6 +87,9 @@ public class NamesSession extends Activity {
     ArrayList<Names_item> list;
     ArrayList<String> words;
 
+    private TextView timerText;
+    private int timerAchived=0;
+
 
 
     WordsAdapterKeypad wordsAdapterKeypad;
@@ -223,29 +226,33 @@ public class NamesSession extends Activity {
 
         laterInflationViews.recyclerViewKeypad.setVisibility(View.GONE);
 
-
+        int scoreE = namesAdapterAll.getScoreE();
+        int scoreM = pickerValue;
         laterInflationViews.przyciskOneInkeypad.setVisibility(View.VISIBLE);
+        if (scoreE>3)
         laterInflationViews.przyciskTwoInKeypad.setVisibility(View.VISIBLE);
+
         laterInflationViews.textViewInKeypad.setVisibility(View.VISIBLE);
         laterInflationViews.textViewSaveScoreInKeypad.setVisibility(View.VISIBLE);
 
-        Handler handlerr = new Handler();
-        handlerr.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                int scoreE = namesAdapterAll.getScoreE();
-                int scoreM = pickerValue;
+
+
 
                 if (scoreE <= 0) {
                     laterInflationViews.textViewInKeypad.setText(String.format("0" + slash + "%d", scoreM));
                 } else {
-                    //TODO null couse not binded view
+
                     laterInflationViews.textViewInKeypad.setText(String.format(scoreE + slash + "%d", scoreM));
                 }
 
+        ButtonAfterSession buttonAfterSession = new ButtonAfterSession(this, 3, scoreE, scoreM, timerAchived);
 
-            }
-        }, 1000);
+
+
+
+        laterInflationViews.przyciskOneInkeypad.setOnClickListener(buttonAfterSession);
+        laterInflationViews.przyciskTwoInKeypad.setOnClickListener(buttonAfterSession);
+
     }
 
     private void sesjaSkonczonaPokaz() {
@@ -277,6 +284,7 @@ public class NamesSession extends Activity {
             public void onTick(long l) {
 
                 timerText.setText(String.valueOf(TimeUnit.MILLISECONDS.toSeconds(l)));
+                timerAchived++;
             }
 
             @Override
@@ -290,7 +298,7 @@ public class NamesSession extends Activity {
         timer.start();
     }
 
-    private TextView timerText;
+
 
 
     @Override

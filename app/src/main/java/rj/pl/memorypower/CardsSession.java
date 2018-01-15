@@ -1,30 +1,23 @@
 package rj.pl.memorypower;
 
 import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageSwitcher;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextSwitcher;
 import android.widget.TextView;
-import android.widget.ViewSwitcher;
 
 import com.squareup.picasso.Picasso;
+// todo change cards png first
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -104,6 +97,10 @@ public class CardsSession extends Activity {
 
     CardsAdapterKeypad cardsAdapterKeypad;
 
+    private TextView timerText;
+    private int timerAchived=0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -177,7 +174,7 @@ public class CardsSession extends Activity {
 
         buttonEndSessionInput.setVisibility(View.INVISIBLE);
 
-        words = new ArrayList<Integer>(list.size());
+        words = new ArrayList<>(list.size());
         for (int i = 0; i < list.size(); i++) {
             words.add(list.get(i).card);
             Log.e("dodajeDoWords", String.valueOf(list.get(i).card));
@@ -245,29 +242,35 @@ public class CardsSession extends Activity {
 
         laterInflationViews.recyclerViewKeypad.setVisibility(View.GONE);
 
+        int scoreE = cardsAdapterAll.getScoreE();
+        int scoreM = pickerValue;
 
         laterInflationViews.przyciskOneInkeypad.setVisibility(View.VISIBLE);
-        laterInflationViews.przyciskTwoInKeypad.setVisibility(View.VISIBLE);
+        if(scoreE>3) {
+            laterInflationViews.przyciskTwoInKeypad.setVisibility(View.VISIBLE);
+        }
         laterInflationViews.textViewInKeypad.setVisibility(View.VISIBLE);
         laterInflationViews.textViewSaveScoreInKeypad.setVisibility(View.VISIBLE);
 
-        Handler handlerr = new Handler();
-        handlerr.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                int scoreE = cardsAdapterAll.getScoreE();
-                int scoreM = pickerValue;
+
 
                 if (scoreE <= 0) {
                     laterInflationViews.textViewInKeypad.setText(String.format("0" + slash + "%d", scoreM));
                 } else {
-                    //TODO null couse not binded view
+
                     laterInflationViews.textViewInKeypad.setText(String.format(scoreE + slash + "%d", scoreM));
                 }
 
 
-            }
-        }, 1000);
+        ButtonAfterSession buttonAfterSession = new ButtonAfterSession(this, 2, scoreE, scoreM, timerAchived);
+
+
+
+
+        laterInflationViews.przyciskOneInkeypad.setOnClickListener(buttonAfterSession);
+        laterInflationViews.przyciskTwoInKeypad.setOnClickListener(buttonAfterSession);
+
+
     }
 
     private void sesjaSkonczonaPokaz() {
@@ -299,6 +302,7 @@ public class CardsSession extends Activity {
             public void onTick(long l) {
 
                 timerText.setText(String.valueOf(TimeUnit.MILLISECONDS.toSeconds(l)));
+                timerAchived++;
             }
 
             @Override
@@ -312,7 +316,7 @@ public class CardsSession extends Activity {
         timer.start();
     }
 
-    private TextView timerText;
+
 
 
     @Override
@@ -332,7 +336,9 @@ public class CardsSession extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
+        if (EventBus.getDefault().isRegistered(cardsAdapterAll))
         EventBus.getDefault().unregister(cardsAdapterAll);
+        if (EventBus.getDefault().isRegistered(cardsAdapterKeypad))
         EventBus.getDefault().unregister(cardsAdapterKeypad);
     }
 }

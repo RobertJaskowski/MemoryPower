@@ -19,11 +19,11 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindColor;
@@ -88,8 +88,6 @@ public class NumbersSession extends Activity {
 
     @BindString(R.string.slash)
     String slash;
-
-    private ArrayAdapter<String> adapter;
 
     private NumbersAdapterAll numbersAdapterAll;
 
@@ -221,7 +219,7 @@ public class NumbersSession extends Activity {
         };
 
 
-        adapter = new ArrayAdapter<>(NumbersSession.this, R.layout.keypad_singleitem, numbers);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(NumbersSession.this, R.layout.keypad_singleitem, numbers);
 
 
         ButterKnife.bind(laterInflationViews, viewInflated);
@@ -361,5 +359,11 @@ public class NumbersSession extends Activity {
 
 
         return true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(numbersAdapterAll);
     }
 }
