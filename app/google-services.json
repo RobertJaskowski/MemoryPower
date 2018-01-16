@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "275219560038",
+    "firebase_url": "https://memorypower-3ada5.firebaseio.com",
+    "project_id": "memorypower-3ada5",
+    "storage_bucket": "memorypower-3ada5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275219560038:android:4cbeb448af698495",
+        "android_client_info": {
+          "package_name": "rj.pl.memorypower"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275219560038-rklbrfjkersc5mp6p51tihvnfet0j7tl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rj.pl.memorypower",
+            "certificate_hash": "6270da1d3f3bdec9a7c5a402a1b3b90896f4135a"
+          }
+        },
+        {
+          "client_id": "275219560038-2j3ic4tkp9p6rdla82cs8edgngs5rd0k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUaQECQtnDAdYius0utlpCp29ockfROtw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "275219560038-2j3ic4tkp9p6rdla82cs8edgngs5rd0k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

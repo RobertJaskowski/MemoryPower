@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
         //todo change icon
 //        int temp = R.drawable.ic_accessible_white_48dp;
 
-        String[] menuNames = new String[]{"Numbers", "Words", "Cards", "Names", "5test", "Stats"};
+        String[] menuNames = new String[]{"Numbers", "Words", "Cards", "Names", "Ranking", "Stats"};
         Drawable[] menuImages = new Drawable[]{temp,temp,temp,temp,temp,temp};
 
         CardAdapterMain adapter = new CardAdapterMain(menuNames, menuImages);
