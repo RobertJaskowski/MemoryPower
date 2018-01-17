@@ -9,28 +9,74 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-
-        <Button
-
-            android:id="@+id/buttonTEMP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add one" />
-
-        <Button
-            android:id="@+id/buttonUpdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="update"/>
-
-        <EditText
-            android:id="@+id/scoreTEMP"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:hint="score" />
+            android:layout_height="wrap_content">
+
+
+            <Button
+
+                android:id="@+id/buttonTEMP1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add one" />
+
+            <Button
+                android:id="@+id/buttonTEMP2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add two" />
+
+            <Button
+                android:id="@+id/buttonUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="update" />
+
+            <EditText
+                android:id="@+id/scoreTEMP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:hint="score" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <Button
+
+                android:id="@+id/buttonTEMP3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="up one" />
+
+            <Button
+                android:id="@+id/buttonTEMP4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="up two" />
+
+            <Button
+                android:id="@+id/buttonUpdate2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="update" />
+
+            <EditText
+                android:id="@+id/scoreTEMP2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:hint="score" />
+        </LinearLayout>
+
+
     </LinearLayout>
 
     <ListView

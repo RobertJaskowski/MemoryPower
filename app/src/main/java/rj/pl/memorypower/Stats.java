@@ -113,6 +113,10 @@ public class Stats extends Activity {
 
     }
 
+    /**
+     *
+     * adds random records for testing purposes
+     */
     public void testRecords(View view) {
         helper.testRecords();
     }
