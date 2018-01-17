@@ -28,7 +28,7 @@ import java.util.List;
 import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
+@SuppressWarnings("WeakerAccess")
 public class Stats extends Activity {
     @BindView(R.id.chart)
     LineChart chart;

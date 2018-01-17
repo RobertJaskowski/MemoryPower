@@ -13,12 +13,12 @@ public class NamesIntro extends Activity {
 
     @BindView(R.id.NamesNumber_picker)
     NumberPicker numberPicker;
-    int numberPickerValue;
+    private int numberPickerValue;
 
     /**
      * for number picker
      */
-    String[] values;
+    private String[] values;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

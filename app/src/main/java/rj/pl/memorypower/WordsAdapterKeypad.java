@@ -2,7 +2,6 @@ package rj.pl.memorypower;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +20,12 @@ import java.util.ArrayList;
 public class WordsAdapterKeypad extends RecyclerView.Adapter<WordsAdapterKeypad.MyViewHolder> {
 
     Context context;
-    ArrayList<String> words;
+    private ArrayList<String> words;
 
-    LayoutInflater infalter;
+    private LayoutInflater infalter;
 
 
-    public WordsAdapterKeypad(Context context, ArrayList<String> words) {
+    WordsAdapterKeypad(Context context, ArrayList<String> words) {
         this.context = context;
         this.words = words;
 
@@ -48,7 +47,7 @@ public class WordsAdapterKeypad extends RecyclerView.Adapter<WordsAdapterKeypad.
 
         View view = infalter.inflate(R.layout.keypad_word_item, parent, false);
 
-        MyViewHolder holder = new MyViewHolder(view);
+        @SuppressWarnings("UnnecessaryLocalVariable") MyViewHolder holder = new MyViewHolder(view);
 
         return holder;
     }
@@ -67,7 +66,7 @@ public class WordsAdapterKeypad extends RecyclerView.Adapter<WordsAdapterKeypad.
 
         TextView textView;
 
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
 
             textView = itemView.findViewById(R.id.WordKeypadText1);
@@ -84,12 +83,12 @@ public class WordsAdapterKeypad extends RecyclerView.Adapter<WordsAdapterKeypad.
         }
     }
 
-    public void delete(int position) {
+    private void delete(int position) {
         words.remove(position);
         notifyItemRemoved(position);
     }
 
-    public void insert(String text) {
+    void insert(String text) {
         words.add(text);
         notifyItemInserted(words.size() - 1);
     }

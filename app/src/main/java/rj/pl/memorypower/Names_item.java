@@ -11,7 +11,7 @@ public class Names_item implements Parcelable{
     int id;
     String word;
 
-    int number;
+    private int number;
 
 
     public Names_item(int id, int number) {
@@ -29,6 +29,7 @@ public class Names_item implements Parcelable{
         this.word = word;
     }
 
+    @SuppressWarnings("WeakerAccess")
     protected Names_item(Parcel in) {
         id = in.readInt();
         number = in.readInt();

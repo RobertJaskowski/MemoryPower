@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.Picasso;
 // todo change cards png first
 
 import org.greenrobot.eventbus.EventBus;
@@ -33,14 +33,16 @@ import butterknife.OnClick;
 
 public class CardsSession extends Activity {
 
-    public static final String EXTRA_PICKER = "picker";
+    private static final String EXTRA_PICKER = "picker";
 
+    @SuppressWarnings("WeakerAccess")
     @BindString(R.string.slash)
     String slash;
 
     @BindColor(R.color.colorAccent)
     int colorAccent;
 
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.gridViewCards)
     ExpandableHeightGridView gridView;
 
@@ -57,9 +59,11 @@ public class CardsSession extends Activity {
 //    @BindView(R.id.progressBar_cards_session)
 //    ProgressBar progressBar;
 
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.endSessionInputCards)
     Button buttonEndSessionInput;
 
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.endSessionCards)
     Button endSessionCards;
 
@@ -79,23 +83,23 @@ public class CardsSession extends Activity {
         TextView textViewSaveScoreInKeypad;
     }
 
-    CardsSession.laterInflationViewsPack laterInflationViews;
-    View viewInflated;
+    private CardsSession.laterInflationViewsPack laterInflationViews;
+    private View viewInflated;
 
-    int pickerValue;
+    private int pickerValue;
 
 //    private int stringIndex = 0;
 //    private TextView textView;
 
 
-    CardsAdapterAll cardsAdapterAll;
-    ArrayList<Cards_item> list;
-    ArrayList<Integer> words;
+    private CardsAdapterAll cardsAdapterAll;
+    private ArrayList<Cards_item> list;
+    private ArrayList<Integer> words;
 
 
-    MyTagTwo tag;
+    private MyTagTwo tag;
 
-    CardsAdapterKeypad cardsAdapterKeypad;
+    private CardsAdapterKeypad cardsAdapterKeypad;
 
     private TextView timerText;
     private int timerAchived=0;
@@ -294,7 +298,7 @@ public class CardsSession extends Activity {
 //        }
 //    }
 
-    CountDownTimer timer;
+    private CountDownTimer timer;
 
     private void startTimer() {
         timer = new CountDownTimer(10000, 1000) {

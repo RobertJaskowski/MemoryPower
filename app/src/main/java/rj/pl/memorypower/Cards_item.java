@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 /**
- * Created by Robert on 09.01.2018 - 18:30.
+ * Created  by Robert on 09.01.2018 - 18:30.
  */
 
 public class Cards_item implements Parcelable {
@@ -14,9 +14,10 @@ public class Cards_item implements Parcelable {
     int card;
 
     @Nullable
+    private
     int toNull;
 
-    int number;
+    private int number;
 
     public Cards_item(int id, int number) {
         this.id = id;
@@ -28,12 +29,13 @@ public class Cards_item implements Parcelable {
         Log.e("cardsitem", String.valueOf(cards.getCard(number)));//todo remove
     }
 
-    public Cards_item(int id, int card, int toNull) {
+    Cards_item(int id, int card, @SuppressWarnings("SameParameterValue") int toNull) {
         this.id = id;
         this.card = card;
         this.toNull = toNull;
     }
 
+    @SuppressWarnings("WeakerAccess")
     protected Cards_item(Parcel in) {
         id = in.readInt();
         card = in.readInt();

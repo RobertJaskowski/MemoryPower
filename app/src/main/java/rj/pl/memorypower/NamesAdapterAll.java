@@ -19,7 +19,7 @@ import java.util.Random;
  * Created by Robert on 07.01.2018 - 18:35.
  */
 
-public class NamesAdapterAll extends BaseAdapter{
+class NamesAdapterAll extends BaseAdapter{
     private Context context;
     private int ile;
 
@@ -79,7 +79,7 @@ public class NamesAdapterAll extends BaseAdapter{
             wchichOneId++;
         }
     }
-    public void addToKeypadEvent(){
+    private void addToKeypadEvent(){
         EventBus.getDefault().post(new MessageEventWordsInsertToKeypad(list.get(wchichOneId).word));
     }
 

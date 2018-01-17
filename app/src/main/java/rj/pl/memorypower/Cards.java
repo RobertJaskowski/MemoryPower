@@ -5,7 +5,7 @@ package rj.pl.memorypower;
  * Created  by Robert on 09.01.2018 - 18:30.
  */
 
-public class Cards {
+class Cards {
     private Integer[] cards=new Integer[]{
             R.drawable.card0,
             R.drawable.card1,

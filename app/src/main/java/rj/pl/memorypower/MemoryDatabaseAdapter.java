@@ -10,10 +10,11 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created  by Robert on 12.01.2018 - 17:21.
  */
 
-public class MemoryDatabaseAdapter {
+@SuppressWarnings("ALL")
+class MemoryDatabaseAdapter {
 
 
-    MemoryDatabaseHelper helper;
+    private MemoryDatabaseHelper helper;
 
     public MemoryDatabaseAdapter(Context context) {
         helper = new MemoryDatabaseHelper(context);

@@ -4,6 +4,7 @@ package rj.pl.memorypower;
  * Created  by Robert on 11.01.2018 - 12:38.
  */
 
+@SuppressWarnings("ALL")
 public class MyTag {
     String code;
     Integer image;

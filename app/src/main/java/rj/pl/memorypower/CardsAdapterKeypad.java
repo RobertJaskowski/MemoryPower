@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -24,12 +23,12 @@ import jp.wasabeef.picasso.transformations.CropTransformation;
  */
 
 public class CardsAdapterKeypad extends RecyclerView.Adapter<CardsAdapterKeypad.MyViewHolder> {
-    Context context;
-    ArrayList<Integer> cards;
+    private Context context;
+    private ArrayList<Integer> cards;
 
-    LayoutInflater infalter;
+    private LayoutInflater infalter;
 
-    public CardsAdapterKeypad(Context context, ArrayList<Integer> cards) {
+    CardsAdapterKeypad(Context context, ArrayList<Integer> cards) {
         this.context = context;
         this.cards = cards;
 
@@ -57,7 +56,7 @@ public class CardsAdapterKeypad extends RecyclerView.Adapter<CardsAdapterKeypad.
 
         View view = infalter.inflate(R.layout.keypad_card_item, parent, false);
 
-        CardsAdapterKeypad.MyViewHolder holder = new CardsAdapterKeypad.MyViewHolder(view);
+        @SuppressWarnings("UnnecessaryLocalVariable") CardsAdapterKeypad.MyViewHolder holder = new CardsAdapterKeypad.MyViewHolder(view);
 
         return holder;
     }
@@ -87,7 +86,7 @@ public class CardsAdapterKeypad extends RecyclerView.Adapter<CardsAdapterKeypad.
         //        TextView textView;
         ImageView imageView;
 
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
 
             imageView = itemView.findViewById(R.id.CardKeypadImg1);
@@ -115,12 +114,12 @@ public class CardsAdapterKeypad extends RecyclerView.Adapter<CardsAdapterKeypad.
         }
     }
 
-    public void delete(int position) {
+    private void delete(int position) {
         cards.remove(position);
         notifyItemRemoved(position);
     }
 
-    public void insert(Integer integer) {
+    private void insert(Integer integer) {
         cards.add(integer);
         notifyItemInserted(cards.size() - 1);
     }

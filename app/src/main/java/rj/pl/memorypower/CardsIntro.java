@@ -13,12 +13,12 @@ public class CardsIntro extends Activity {
 
     @BindView(R.id.CNumber_picker)
     NumberPicker numberPicker;
-    int numberPickerValue;
+    private int numberPickerValue;
 
     /**
      * for number picker
      */
-    String[] values;
+    private String[] values;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

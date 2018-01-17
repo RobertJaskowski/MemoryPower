@@ -31,10 +31,10 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+@SuppressWarnings("WeakerAccess")
 public class NumbersSession extends Activity {
 
-    @SuppressWarnings("WeakerAccess")
+
     public static final String EXTRA_PICKER = "picker";
 
 

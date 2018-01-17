@@ -11,9 +11,9 @@ import java.util.Calendar;
  * Created  by Robert on 12.01.2018 - 16:25.
  */
 
-public class ButtonAfterSession implements View.OnClickListener {
+class ButtonAfterSession implements View.OnClickListener {
 
-    Context context;
+    private Context context;
     private int typeSession;
     private int scoreE;
     private int scoreM;
@@ -109,7 +109,7 @@ public class ButtonAfterSession implements View.OnClickListener {
         }
     }
 
-    void getCalendar() {
+    private void getCalendar() {
         Calendar calendar = Calendar.getInstance();
         day = calendar.get(Calendar.DATE);
         month = calendar.get(Calendar.MONTH);

@@ -12,8 +12,10 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends Activity {
 
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.main_recycler)
     RecyclerView recyclerView;
+    @SuppressWarnings("WeakerAccess")
     @BindDrawable(R.drawable.ic_accessible_white_48dp)
     Drawable temp;
 

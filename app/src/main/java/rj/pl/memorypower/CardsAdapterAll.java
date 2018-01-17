@@ -27,11 +27,11 @@ import jp.wasabeef.picasso.transformations.CropTransformation;
  * Created  by Robert on 09.01.2018 - 18:30.
  */
 
-public class CardsAdapterAll extends BaseAdapter {
+class CardsAdapterAll extends BaseAdapter {
     private Context context;
     private int ile;
 
-    MyTagTwo myTagImage;
+    private MyTagTwo myTagImage;
 
 
 
@@ -95,7 +95,7 @@ public class CardsAdapterAll extends BaseAdapter {
         }
     }
 
-    public void addToKeypadEvent(){
+    private void addToKeypadEvent(){
         EventBus.getDefault().post(new MessageEventIntInsertToKeypad(list.get(wchichOneId).card));
     }
 

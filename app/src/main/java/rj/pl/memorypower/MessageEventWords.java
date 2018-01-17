@@ -4,6 +4,7 @@ package rj.pl.memorypower;
  * Created by Robert on 07.01.2018 - 12:26.
  */
 
+@SuppressWarnings("ALL")
 public class MessageEventWords {
     String text;
 

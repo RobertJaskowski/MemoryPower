@@ -9,6 +9,7 @@ import android.widget.GridView;
  * Created by Robert on 31.12.2017 - 09:45.
  */
 
+@SuppressWarnings("ALL")
 public class ExpandableHeightGridView extends GridView
 {
 

@@ -1,9 +1,10 @@
 package rj.pl.memorypower;
 
 /**
- * Created by Robert on 11.01.2018 - 14:53.
+ * Created  by Robert on 11.01.2018 - 14:53.
  */
 
+@SuppressWarnings("ALL")
 public class MyTagTwo {
     String code;
     Integer image;

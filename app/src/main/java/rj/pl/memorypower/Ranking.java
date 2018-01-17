@@ -29,7 +29,7 @@ public class Ranking extends Activity {
     EditText scoreTemp;
 
 
-    DatabaseReference myRef;
+    private DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

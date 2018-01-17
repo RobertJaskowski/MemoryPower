@@ -13,14 +13,7 @@ public class NumbersIntro extends Activity {
 
     @BindView(R.id.NNumber_picker)
     NumberPicker numberPicker;
-    private int numberPickerValue;
 
-
-
-    /**
-     * for number picker
-     */
-    private String[] values;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +23,10 @@ public class NumbersIntro extends Activity {
         ButterKnife.bind(this);
 
 
-        values = new String[24];
+        /*
+      for number picker
+     */
+        String[] values = new String[24];
 
         int n = 4;
         for (int i = 0; i < 24; i++) {
@@ -52,10 +48,10 @@ public class NumbersIntro extends Activity {
 
     @OnClick(R.id.startNumberSession)
     public void startNumberSession(){
-        numberPickerValue = numberPicker.getValue() * 2 + 4;
+        int numberPickerValue = numberPicker.getValue() * 2 + 4;
 
         Intent intent = new Intent(this,NumbersSession.class);
-        intent.putExtra("picker",numberPickerValue);
+        intent.putExtra("picker", numberPickerValue);
         startActivity(intent);
     }
 }

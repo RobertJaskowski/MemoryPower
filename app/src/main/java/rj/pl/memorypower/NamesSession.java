@@ -32,23 +32,30 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+@SuppressWarnings("WeakerAccess")
 public class NamesSession extends Activity {
 
+    @SuppressWarnings("WeakerAccess")
     public static final String EXTRA_PICKER = "picker";
 
+    @SuppressWarnings("WeakerAccess")
     @BindString(R.string.slash)
     String slash;
 
+    @SuppressWarnings("WeakerAccess")
     @BindColor(R.color.colorAccent)
     int colorAccent;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.gridViewNames)
     ExpandableHeightGridView gridView;
 
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.text_switcher_names)
     TextSwitcher textSwitcher;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.sessionButton_TextSwitcher_names)
     Button nextButton;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.progressBar_names_session)
     ProgressBar progressBar;
 
