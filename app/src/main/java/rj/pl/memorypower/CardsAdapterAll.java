@@ -179,7 +179,7 @@ class CardsAdapterAll extends BaseAdapter {
 
             } else {
                 view.setBackgroundResource(R.color.lightDark);
-//                holder.textView2.setText(tempStart.card);todo
+//                holder.textViewScore.setText(tempStart.card);todo
                 holder.textView2.setTextColor(view.getResources().getColor(R.color.lightGreen));
 
             }
@@ -204,7 +204,7 @@ class CardsAdapterAll extends BaseAdapter {
 //            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),temp.card);
 //            Bitmap btm = Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight()/5);
 //            holder.imageView.setImageBitmap(btm);
-////            holder.textView2.setText(String.valueOf(temp.id));todo
+////            holder.textViewScore.setText(String.valueOf(temp.id));todo
 //        } else {
 //            Cards_item temp = list.get(i);
 //            Cards_item tempStart = listCopiaStart.get(i);
@@ -213,8 +213,8 @@ class CardsAdapterAll extends BaseAdapter {
 //
 //            } else {
 //                view.setBackgroundResource(R.color.lightDark);
-////                holder.textView2.setText(tempStart.card);todo
-//                holder.textView2.setTextColor(view.getResources().getColor(R.color.lightGreen));
+////                holder.textViewScore.setText(tempStart.card);todo
+//                holder.textViewScore.setTextColor(view.getResources().getColor(R.color.lightGreen));
 //
 //            }
 //        }

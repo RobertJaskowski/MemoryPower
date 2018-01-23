@@ -2,7 +2,7 @@
 <resources>
     <item name="TAG_ONLINE" type="id" />
     <item name="Tag_holder" type="id" />
-    <string-array name="types">
+    <string-array name="months">
         <item>January</item>
         <item>February</item>
         <item>March</item>
@@ -16,6 +16,15 @@
         <item>November</item>
         <item>December</item>
 
+
+    </string-array>
+
+
+    <string-array name="types">
+    <item>Numbers</item>
+    <item>Words</item>
+    <item>Cards</item>
+    <item>Names</item>
 
     </string-array>
 </resources>

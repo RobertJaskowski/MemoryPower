@@ -4,9 +4,15 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,7 +28,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -58,6 +67,13 @@ public class Ranking extends Activity {
     @BindView(R.id.scoreTEMP2)
     EditText scoreTempDown;
 
+    @BindView(R.id.rankingSpinnerMonth)
+    Spinner rankingSpinnerMonth;
+
+
+    @BindView(R.id.rankingSpinnerType)
+    Spinner rankingSpinnerType;
+
 
     @BindView(R.id.ranking)
     ListView listView;
@@ -69,10 +85,11 @@ public class Ranking extends Activity {
     private FirebaseAuth mAuth;
 
     private FirebaseUser currentUser;
+    private FirebaseDatabase database;
 
 
-
-    ArrayList<String> userlist;
+    private List<User> userlist;
+    private ArrayList<String> adapterList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,10 +98,14 @@ public class Ranking extends Activity {
 
         ButterKnife.bind(this);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance();
         myRef = database.getReferenceFromUrl("https://memorypower-3ada5.firebaseio.com/");
 
 
+        int month = Calendar.getInstance().get(Calendar.MONTH);
+
+
+        rankingSpinnerType.setOnItemSelectedListener(new typeItemClicked());
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -101,30 +122,25 @@ public class Ranking extends Activity {
         mAuth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    Log.e("sign ","sign in success");
-                    showList();
-                }else{
-                  Log.e("sign ","failed");
+                if (task.isSuccessful()) {
+                    Log.e("sign ", "sign in success");
+                    showList(((String) rankingSpinnerType.getItemAtPosition(0)).toLowerCase()); //gets numbers type
+                } else {
+                    Log.e("sign ", "failed");
                 }
             }
         });
 
 
-
-
-
-
-
-
-
-
-
     }
 
-    private void showList() {
+    private void showList(String type) {
 
-        Query query = myRef.orderByChild("score").limitToLast(5);
+
+        DatabaseReference reference = database.getReference(type);
+
+        Query query = reference.orderByChild("score").limitToLast(5);
+
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -132,14 +148,26 @@ public class Ranking extends Activity {
 
 //                Log.e("tad", String.valueOf(User.score)+" "+ User.name);
 
-                userlist = new ArrayList<String>();
+                userlist = new ArrayList<>();
 
                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
 
-                    User score = dsp.getValue(User.class);
-                    userlist.add(score.name);
-                    Log.e("tad", String.valueOf(score.name));
+                    User item = dsp.getValue(User.class);
+                    userlist.add(item);
+                    Log.e("tad", String.valueOf(item.score) + " " + String.valueOf(item.name));
                 }
+
+
+                Collections.reverse(userlist);
+
+//                for (User item : userlist)
+//                {
+//                    adapterList.add(item.)
+//                }
+
+
+                setSimpleAdapter();
+
             }
 
             @Override
@@ -149,23 +177,23 @@ public class Ranking extends Activity {
         });
 
 
-//        for (String u:userlist) {
-//            Log.e("tz",u);
-//
-//        }
+    }
 
+    void setSimpleAdapter() {
+
+        customRankingAdapter customRankingAdapter = new customRankingAdapter(this, userlist);
+        listView.setAdapter(customRankingAdapter);
     }
 
     @OnClick(R.id.buttonTEMP1)
     void addScoreToNumbers() {
         Integer score = Integer.parseInt(scoreTempUp.getText().toString());
         String name = String.valueOf(scoreTempDown.getText());
-        if (score==0)
+        if (score == 0)
             score = 3;
 
         if (name.equals(""))
-            name= "test";
-
+            name = "test";
 
 
         Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
@@ -197,7 +225,7 @@ public class Ranking extends Activity {
         Map<String, Object> childUpdates = new HashMap<>();
 //        childUpdates.put(key+ "/" + userKey, postValues); //creates new in numbers with key > data
 //        childUpdates.put(key, postValues); // this delates old from numbers but doesnt create user folder,  numbers> data
-        childUpdates.put(key+"/"+ currentUser.getUid()+"/", postValues);
+        childUpdates.put(key + "/" + currentUser.getUid() + "/", postValues);
 
 
         myRef.updateChildren(childUpdates);
@@ -232,28 +260,33 @@ public class Ranking extends Activity {
 
     }
 
+    class typeItemClicked implements  AdapterView.OnItemSelectedListener {
+
+
+
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            switch (i) {
+                case 0:
+                    showList("numbers");
+                    break;
+                case 1:
+                    showList("words");
+                    break;
+                case 2:
+                    showList("cards");
+                    break;
+                case 3:
+                    showList("names");
+                    break;
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
+        }
+    }
+
 }
 
-class User {
-    public String name;
-    public int score;
-    public int time;
-
-    public User() {
-    }
-
-    public User(String name, int score, int time) {
-        this.name = name;
-        this.score = score;
-        this.time = time;
-    }
-
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("name", name);
-        result.put("score", score);
-        result.put("time", time);
-        return result;
-    }
-
-}

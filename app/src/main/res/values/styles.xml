@@ -22,6 +22,13 @@
     <style name="BackgroundForNumbersGridView" parent="android:Widget.TextView">
         <item name="android:background">@color/colorAccent</item>
     </style>
+    
+    <style name="searchView" parent="AppTheme">
+        <item name="android:textColorPrimary">@color/primaryTextColor</item>
+        <item name="android:textColorSecondary">@color/primaryTextColor</item>
+
+        
+    </style>
 
 
 

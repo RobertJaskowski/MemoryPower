@@ -38,11 +38,11 @@
 
             <EditText
                 android:id="@+id/scoreTEMP"
-                android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:hint="score" />
+                android:hint="score"
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,6 +76,47 @@
                 android:layout_gravity="center_vertical"
                 android:hint="score" />
         </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/rankingSpinnerType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@color/lightDark"
+                    android:entries="@array/types"
+                    android:padding="5dp"
+                    android:popupBackground="@color/lightDark"
+                    android:textAlignment="center">
+
+                </Spinner>
+
+                <Spinner
+                    android:id="@+id/rankingSpinnerMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@color/lightDark"
+                    android:entries="@array/months"
+                    android:padding="5dp"
+                    android:popupBackground="@color/lightDark"
+                    android:textAlignment="center">
+
+                </Spinner>
+            </LinearLayout>
+
+
+
+
+
 
 
     </LinearLayout>
