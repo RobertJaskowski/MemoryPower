@@ -1,11 +1,26 @@
 package rj.pl.memorypower;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Calendar;
+
+import butterknife.BindColor;
+import butterknife.BindDrawable;
 
 /**
  * Created  by Robert on 12.01.2018 - 16:25.
@@ -25,6 +40,16 @@ class ButtonAfterSession implements View.OnClickListener {
 
 
     private MemoryDatabaseAdapter helper;
+
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
+
+    @BindColor(R.color.lightDark)
+    int lightDark;
+
+    @BindColor(R.color.primaryTextColor)
+    int primaryTextColor;
+
 
     @Override
     public String toString() {
@@ -51,19 +76,99 @@ class ButtonAfterSession implements View.OnClickListener {
 
         helper = new MemoryDatabaseAdapter(context);
 
+        if (scoreE>3) { //todo add setting for always saving and setting for always same name to ;skip; dialog
+            if (isNetworkAvailable()) {
+                showAlert();
+            } else {
+                Toast.makeText(context, "fail allert", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
+    void showAlert() {
+
+        final AlertDialog.Builder alert = new AlertDialog.Builder(context,R.style.AlertDialog);
+
+        int maxLenght=20;
+
+        final EditText dialogText = new EditText(context);
+        dialogText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLenght)});
+        alert.setMessage("Who achived this?");
+
+        alert.setView(dialogText);
+
+
+        alert.setPositiveButton("Send", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String text = dialogText.getText().toString();
+                addScoreToFirebase(text);
+
+            }
+        });
+
+        alert.setNegativeButton("Don't send", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+
+        AlertDialog alertDialog = alert.create();
+        alertDialog.show();
+
+
+
+    }
+
+    void addScoreToFirebase(String messageWritten) {
+
+
+        String convertedType = null;
+
+        switch (typeSession){
+            case 0:
+                convertedType = "numbers";
+                break;
+            case 1:
+                convertedType = "words";
+                break;
+            case 2:
+                convertedType = "cards";
+                break;
+            case 3:
+                convertedType = "names";
+                break;
+        }
+
+
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReferenceFromUrl("https://memorypower-3ada5.firebaseio.com/");
+
+        String key = myRef.push().getKey();
+
+        User testObj = new User(messageWritten, scoreE, timeSpent);
+        myRef.child(convertedType).child(String.valueOf(month)).child(key).setValue(testObj);
+
+    }
+
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case (R.id.przyciskOneInKeypad)://no - place back to main here
-                Log.e("button one clicked", "clk");
-//                Toast.makeText(context, toString(), Toast.LENGTH_LONG).show();
 
                 String messageTemp = helper.getAllData();
 
-                Log.e("tag", messageTemp);
+
 
                 Toast.makeText(context, messageTemp, Toast.LENGTH_LONG).show();
 
@@ -73,9 +178,6 @@ class ButtonAfterSession implements View.OnClickListener {
                 getCalendar();
 
 
-                Log.e("button two clicked", "clk");
-
-
 //                new InsertRecordTask().execute();
 
                 insertRecord();
@@ -83,12 +185,10 @@ class ButtonAfterSession implements View.OnClickListener {
                 break;
 
             case (R.id.przyciskOneInKeypadWord)://no - place back to main here
-                Log.e("button one clicked", "clk");
-//                Toast.makeText(context, toString(), Toast.LENGTH_LONG).show();
+
 
                 String message = helper.getAllData();
 
-                Log.e("tag", message);
 
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
@@ -96,12 +196,6 @@ class ButtonAfterSession implements View.OnClickListener {
             case R.id.przyciskTwoInKeypadWord://Save - place saving here
 
                 getCalendar();
-
-
-                Log.e("button two clicked", "clk");
-
-
-//                new InsertRecordTask().execute();
 
                 insertRecord();
 
@@ -144,32 +238,5 @@ class ButtonAfterSession implements View.OnClickListener {
     }
 
 
-//     class InsertRecordTask extends AsyncTask<Void, Void, Boolean> {
-//
-//
-//
-//
-//        @Override
-//        protected Boolean doInBackground(Void... voids) {
-//
-//            long id = helper.insertRecord("numbers", 6, 9, 13, 0, 2018, 6);
-//
-//            if (id < 0) {
-//                return false;
-//            } else {
-//                return true;
-//            }
-//
-//
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Boolean abool) {
-//            if (abool) {
-//                Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
-//            } else {
-//                Toast.makeText(context, "failure", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
+
 }

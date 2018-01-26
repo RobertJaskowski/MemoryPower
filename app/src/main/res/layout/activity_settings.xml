@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="rj.pl.memorypower.Settings">
+
+    <!--  session split  -->
+
+    <TextView
+        android:id="@+id/headerLead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="@string/leaderboard"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <View
+        android:id="@+id/lineLead"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/headerLead"
+        android:background="@drawable/gradient_line" />
+
+    <!--  session split  -->
+
+
+    <TextView
+        android:id="@+id/setLead1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lineLead"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/don_t_post_my_scores" />
+
+    <CheckBox
+        android:id="@+id/leadSw1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/lineLead"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="5dp"
+        android:onClick="checkedChanged"/>
+
+    <!-- split  -->
+    <TextView
+        android:id="@+id/setLead2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/setLead1"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/always_save_to_leaderboard" />
+
+    <CheckBox
+        android:id="@+id/leadSw2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/setLead1"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="5dp"
+        android:onClick="checkedChanged"/>
+
+
+    <!-- split  -->
+
+    <TextView
+        android:id="@+id/textLead1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/leadSw2"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+
+        android:text="@string/save_ass" />
+
+    <EditText
+        android:id="@+id/textEditTextName1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/textLead1"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
+        android:layout_toEndOf="@id/text1"
+        android:enabled="false"
+        android:gravity="end"
+        android:hint="@string/write_your_name_here"
+        android:inputType="text"
+        android:maxLength="20"
+        android:maxLines="2" />
+
+
+    <!-- session split   -->
+
+    <TextView
+        android:id="@+id/headerStats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textLead1"
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+        android:text="@string/statistics"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <View
+        android:id="@+id/lineStats"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/headerStats"
+        android:background="@drawable/gradient_line" />
+
+    <!--session split   -->
+
+
+    <TextView
+        android:id="@+id/setStat1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lineStats"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="Display after month is selected" />
+
+    <CheckBox
+        android:id="@+id/statSw1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/setStat1"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
+        android:layout_toEndOf="@id/text1"
+        android:gravity="end"
+        android:onClick="checkedChanged"/>
+
+    <!--split-->
+
+    <Button
+        android:id="@+id/statClear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/setStat1"
+        android:layout_margin="15dp"
+        android:background="@color/lightDark"
+        android:padding="10dp"
+        android:text="@string/clear_user_statistics"
+        android:onClick="clearUserStatistics" />
+
+
+    <!--session split   -->
+
+
+    <TextView
+        android:id="@+id/headerSession"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/statClear"
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+        android:text="@string/sessions"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <View
+        android:id="@+id/lineSession"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/headerSession"
+        android:background="@drawable/gradient_line" />
+
+    <!--session split   -->
+
+    <TextView
+        android:id="@+id/setSess1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lineSession"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/session_timer" />
+
+    <EditText
+        android:id="@+id/sessionTimerEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/setSess1"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
+        android:layout_toEndOf="@id/text1"
+        android:gravity="end"
+        android:hint="@string/how_much_time_allowed"
+        android:inputType="number"
+        android:maxLength="2" />
+
+
+
+
+
+</RelativeLayout>

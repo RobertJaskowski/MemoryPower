@@ -1,5 +1,6 @@
 package rj.pl.memorypower;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,6 +43,9 @@ public class NumbersIntro extends Activity {
 
 
         numberPicker.setDisplayedValues(values);
+
+
+
 
 
     }

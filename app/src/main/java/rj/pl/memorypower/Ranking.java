@@ -1,6 +1,9 @@
 package rj.pl.memorypower;
 
 import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -13,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -74,6 +78,9 @@ public class Ranking extends Activity {
     @BindView(R.id.rankingSpinnerType)
     Spinner rankingSpinnerType;
 
+    @BindView(R.id.ranking_offlineText)
+    TextView offlineText;
+
 
     @BindView(R.id.ranking)
     ListView listView;
@@ -91,6 +98,8 @@ public class Ranking extends Activity {
     private List<User> userlist;
     private ArrayList<String> adapterList;
 
+    int month;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,13 +111,17 @@ public class Ranking extends Activity {
         myRef = database.getReferenceFromUrl("https://memorypower-3ada5.firebaseio.com/");
 
 
-        int month = Calendar.getInstance().get(Calendar.MONTH);
+        month = Calendar.getInstance().get(Calendar.MONTH);
 
 
         rankingSpinnerType.setOnItemSelectedListener(new typeItemClicked());
+        rankingSpinnerMonth.setOnItemSelectedListener(new typeItemClicked());
 
 
         mAuth = FirebaseAuth.getInstance();
+
+
+        checkNetwork();
 
 
     }
@@ -124,9 +137,12 @@ public class Ranking extends Activity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Log.e("sign ", "sign in success");
-                    showList(((String) rankingSpinnerType.getItemAtPosition(0)).toLowerCase()); //gets numbers type
+                    showList(((String) rankingSpinnerType.getItemAtPosition(0)).toLowerCase(), String.valueOf(month)); //gets numbers type
                 } else {
                     Log.e("sign ", "failed");
+
+
+
                 }
             }
         });
@@ -134,10 +150,26 @@ public class Ranking extends Activity {
 
     }
 
-    private void showList(String type) {
+    private void checkNetwork() {
+        if (!isNetworkAvailable())
+            offlineText.setVisibility(View.VISIBLE);
+        else
+            offlineText.setVisibility(View.GONE);
+    }
 
 
-        DatabaseReference reference = database.getReference(type);
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    private void showList(String type,String month) {
+
+
+        DatabaseReference reference = database.getReference(type+"/"+month);
 
         Query query = reference.orderByChild("score").limitToLast(5);
 
@@ -196,12 +228,14 @@ public class Ranking extends Activity {
             name = "test";
 
 
-        Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
+
+
+//        Toast.makeText(this, month, Toast.LENGTH_SHORT).show();
         String key = myRef.child("numbers").push().getKey();
 
         User testObj = new User(name, score, 35);
 //        myRef.child("numbers").child(currentUser.getUid()).setValue(User);  //todo this works with anonymous auth , its overriding data
-        myRef.child("numbers").child(key).setValue(testObj);
+        myRef.child("numbers").child(String.valueOf(month)).child(key).setValue(testObj);
 
     }
 
@@ -238,27 +272,27 @@ public class Ranking extends Activity {
 
     }
 
-    boolean checkIfFirebaseHasData(String key) {
-
-
-        myRef.child("numbers").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    dataCheck = true;
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        return dataCheck;
-
-    }
+//    boolean checkIfFirebaseHasData(String key) {
+//
+//
+//        myRef.child("numbers").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.exists()) {
+//                    dataCheck = true;
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//        return dataCheck;
+//
+//    }
 
     class typeItemClicked implements  AdapterView.OnItemSelectedListener {
 
@@ -266,20 +300,27 @@ public class Ranking extends Activity {
 
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-            switch (i) {
-                case 0:
-                    showList("numbers");
-                    break;
-                case 1:
-                    showList("words");
-                    break;
-                case 2:
-                    showList("cards");
-                    break;
-                case 3:
-                    showList("names");
-                    break;
-            }
+            checkNetwork();
+
+            String selectedType = String.valueOf(rankingSpinnerType.getSelectedItem().toString().toLowerCase());
+            String selectedMonth = String.valueOf(rankingSpinnerMonth.getSelectedItemPosition());
+
+            showList(selectedType,selectedMonth);
+
+//            switch (i) {
+//                case 0:
+//                    showList("numbers",selectedMonth);
+//                    break;
+//                case 1:
+//                    showList("words",selectedMonth);
+//                    break;
+//                case 2:
+//                    showList("cards",selectedMonth);
+//                    break;
+//                case 3:
+//                    showList("names",selectedMonth);
+//                    break;
+//            }
         }
 
         @Override

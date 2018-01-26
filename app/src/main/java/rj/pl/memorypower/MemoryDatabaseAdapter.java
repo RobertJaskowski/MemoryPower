@@ -15,9 +15,11 @@ class MemoryDatabaseAdapter {
 
 
     private MemoryDatabaseHelper helper;
+    private Context context;
 
     public MemoryDatabaseAdapter(Context context) {
         helper = new MemoryDatabaseHelper(context);
+        this.context = context;
 
 
     }
@@ -137,6 +139,11 @@ class MemoryDatabaseAdapter {
 
             return buffer.toString();
         }
+    }
+
+
+    public void dropDatabase(){
+        context.deleteDatabase(MemoryDatabaseHelper.DB_NAME);
     }
 
     public long checkIfExist(int whatType, int day) {//transfer month and year here too
