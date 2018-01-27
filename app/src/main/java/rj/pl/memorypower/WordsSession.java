@@ -1,6 +1,7 @@
 package rj.pl.memorypower;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -57,6 +59,7 @@ public class WordsSession extends Activity {
 
     @BindView(R.id.endSessionWords)
     Button endSessionWords;
+    private int timeMax;
 
     class laterInflationViewsPack{
         @BindView(R.id.przyciskOneInKeypadWord)
@@ -165,6 +168,15 @@ public class WordsSession extends Activity {
 
         laterInflationViews = new laterInflationViewsPack();
 
+    }
+
+
+    private void getPrefs() {
+        SharedPreferences sharedPreferences = getSharedPreferences("MySettings",MODE_PRIVATE);
+
+        timeMax = Integer.parseInt(sharedPreferences.getString("sessionTimer","60")+"000");
+
+        Log.e("sessionTime", String.valueOf(timeMax));
     }
 
     @OnClick(R.id.endSessionWords)
@@ -283,7 +295,7 @@ public class WordsSession extends Activity {
     CountDownTimer timer;
 
     private void startTimer() {
-        timer = new CountDownTimer(10000, 1000) {
+        timer = new CountDownTimer(timeMax, 1000) {
             @Override
             public void onTick(long l) {
 
@@ -309,6 +321,8 @@ public class WordsSession extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
+        getPrefs();
+
         MenuItem timerItem = menu.findItem(R.id.timer_session);
         timerText = (TextView) timerItem.getActionView();
         timerText.setTextSize(30);
@@ -326,6 +340,8 @@ public class WordsSession extends Activity {
         EventBus.getDefault().unregister(wordsAdapterAll);
         if (EventBus.getDefault().isRegistered(wordsAdapterKeypad))
         EventBus.getDefault().unregister(wordsAdapterKeypad);
+
+        finish();
     }
 }
 

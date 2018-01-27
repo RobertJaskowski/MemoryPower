@@ -1,11 +1,13 @@
 package rj.pl.memorypower;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -106,12 +108,17 @@ public class NumbersSession extends Activity {
     private TextView timerText;
 
 
+    private int timeMax;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numbers_session);
 
         ButterKnife.bind(this);
+
+
 
 
         //noinspection ConstantConditions
@@ -166,6 +173,14 @@ public class NumbersSession extends Activity {
         buttonEndSessionInput.setVisibility(View.INVISIBLE);
         laterInflationViews = new laterInflationViewsPack();
 
+    }
+
+    private void getPrefs() {
+        SharedPreferences sharedPreferences = getSharedPreferences("MySettings",MODE_PRIVATE);
+
+        timeMax = Integer.parseInt(sharedPreferences.getString("sessionTimer","60")+"000");
+
+        Log.e("sessionTime", String.valueOf(timeMax));
     }
 
     @OnClick(R.id.sessionButton_TextSwitcher)
@@ -326,7 +341,7 @@ public class NumbersSession extends Activity {
 
 
     private void startTimer() {
-        timer = new CountDownTimer(10000, 1000) {
+        timer = new CountDownTimer(timeMax, 1000) {
             @Override
             public void onTick(long l) {
                 timerText.setText(String.valueOf(TimeUnit.MILLISECONDS.toSeconds(l)));
@@ -351,6 +366,8 @@ public class NumbersSession extends Activity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
 
+        getPrefs();
+
         MenuItem timerItem = menu.findItem(R.id.timer_session);
         timerText = (TextView) timerItem.getActionView();
         timerText.setTextSize(30);
@@ -365,5 +382,8 @@ public class NumbersSession extends Activity {
     protected void onPause() {
         super.onPause();
         EventBus.getDefault().unregister(numbersAdapterAll);
+
+
+        finish();
     }
 }

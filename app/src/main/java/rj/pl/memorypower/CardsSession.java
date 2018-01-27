@@ -1,6 +1,7 @@
 package rj.pl.memorypower;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -66,6 +67,7 @@ public class CardsSession extends Activity {
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.endSessionCards)
     Button endSessionCards;
+    private int timeMax;
 
     class laterInflationViewsPack {
         @BindView(R.id.przyciskOneInKeypadWord)
@@ -189,6 +191,14 @@ public class CardsSession extends Activity {
 
     }
 
+    private void getPrefs() {
+        SharedPreferences sharedPreferences = getSharedPreferences("MySettings",MODE_PRIVATE);
+
+        timeMax = Integer.parseInt(sharedPreferences.getString("sessionTimer","60")+"000");
+
+        Log.e("sessionTime", String.valueOf(timeMax));
+    }
+
     @OnClick(R.id.endSessionCards)
     void endSession() {
 //        nextButton.setVisibility(View.GONE);
@@ -301,7 +311,7 @@ public class CardsSession extends Activity {
     private CountDownTimer timer;
 
     private void startTimer() {
-        timer = new CountDownTimer(10000, 1000) {
+        timer = new CountDownTimer(timeMax, 1000) {
             @Override
             public void onTick(long l) {
 
@@ -327,6 +337,8 @@ public class CardsSession extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
+        getPrefs();
+
         MenuItem timerItem = menu.findItem(R.id.timer_session);
         timerText = (TextView) timerItem.getActionView();
         timerText.setTextSize(30);
@@ -344,6 +356,9 @@ public class CardsSession extends Activity {
         EventBus.getDefault().unregister(cardsAdapterAll);
         if (EventBus.getDefault().isRegistered(cardsAdapterKeypad))
         EventBus.getDefault().unregister(cardsAdapterKeypad);
+
+
+        finish();
     }
 }
 

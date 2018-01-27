@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
@@ -76,20 +77,33 @@ class ButtonAfterSession implements View.OnClickListener {
 
         helper = new MemoryDatabaseAdapter(context);
 
-        if (scoreE>3) { //todo add setting for always saving and setting for always same name to ;skip; dialog
-            if (isNetworkAvailable()) {
-                showAlert();
-            } else {
-                Toast.makeText(context, "fail allert", Toast.LENGTH_SHORT).show();
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MySettings", Context.MODE_PRIVATE);
+
+        boolean dontPostMyScores = sharedPreferences.getBoolean("leadSw1", false);
+        boolean alwaysSaveToLeaderboardAs = sharedPreferences.getBoolean("leadSw2",false);
+
+
+        if (scoreE > 3) {
+            if (!dontPostMyScores) {
+                if (isNetworkAvailable()) {
+                    if (alwaysSaveToLeaderboardAs){
+
+                        addScoreToFirebase(sharedPreferences.getString("name","Anonymous"));
+                    }else{
+                        showAlert();
+                    }
+                } else {
+                    Toast.makeText(context, "Check internet connection", Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }
 
     void showAlert() {
 
-        final AlertDialog.Builder alert = new AlertDialog.Builder(context,R.style.AlertDialog);
+        final AlertDialog.Builder alert = new AlertDialog.Builder(context, R.style.AlertDialog);
 
-        int maxLenght=20;
+        int maxLenght = 20;
 
         final EditText dialogText = new EditText(context);
         dialogText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLenght)});
@@ -119,7 +133,6 @@ class ButtonAfterSession implements View.OnClickListener {
         alertDialog.show();
 
 
-
     }
 
     void addScoreToFirebase(String messageWritten) {
@@ -127,7 +140,7 @@ class ButtonAfterSession implements View.OnClickListener {
 
         String convertedType = null;
 
-        switch (typeSession){
+        switch (typeSession) {
             case 0:
                 convertedType = "numbers";
                 break;
@@ -167,7 +180,6 @@ class ButtonAfterSession implements View.OnClickListener {
             case (R.id.przyciskOneInKeypad)://no - place back to main here
 
                 String messageTemp = helper.getAllData();
-
 
 
                 Toast.makeText(context, messageTemp, Toast.LENGTH_LONG).show();
@@ -225,7 +237,7 @@ class ButtonAfterSession implements View.OnClickListener {
                 Toast.makeText(context, "success addin", Toast.LENGTH_SHORT).show();
             }
         } else {
-            long id = helper.updateRecord(typeSession,scoreE,scoreM,day,month,year,timeSpent);
+            long id = helper.updateRecord(typeSession, scoreE, scoreM, day, month, year, timeSpent);
             if (id < 0) {
                 Toast.makeText(context, "failure updatin", Toast.LENGTH_SHORT).show();
             } else {
@@ -236,7 +248,6 @@ class ButtonAfterSession implements View.OnClickListener {
 
 
     }
-
 
 
 }
