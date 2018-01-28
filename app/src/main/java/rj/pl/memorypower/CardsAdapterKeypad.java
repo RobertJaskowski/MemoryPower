@@ -69,7 +69,7 @@ public class CardsAdapterKeypad extends RecyclerView.Adapter<CardsAdapterKeypad.
         Picasso
                 .with(context)
                 .load(cards.get(position))
-                .transform(new CropTransformation(150, 120, CropTransformation.GravityHorizontal.LEFT, CropTransformation.GravityVertical.TOP))
+//                .transform(new CropTransformation(150, 120, CropTransformation.GravityHorizontal.LEFT, CropTransformation.GravityVertical.TOP))
                 .into(myViewHolder.imageView);
 
         myViewHolder.imageView.setTag(myTag);

@@ -71,7 +71,7 @@ class CardsAdapterAll extends BaseAdapter {
 
         for (int i = 0; i < ile; i++) {
 //            Log.e("a", String.valueOf(new Random().nextInt(9- 1 + 1) +1));
-            Cards_item temp = new Cards_item(i + 1, new Random().nextInt(20 - 1 + 1) + 1);
+            Cards_item temp = new Cards_item(i + 1, new Random().nextInt(52 - 1 + 1) + 1);// here was 20 bound - 52 max is good
             list.add(temp);
             listCopiaStart.add(temp);
         }
@@ -161,7 +161,7 @@ class CardsAdapterAll extends BaseAdapter {
             Picasso
                     .with(context)
                     .load(temp.card)
-                    .transform(new CropTransformation(5,CropTransformation.GravityHorizontal.CENTER,CropTransformation.GravityVertical.TOP))
+//                    .transform(new CropTransformation(5,CropTransformation.GravityHorizontal.CENTER,CropTransformation.GravityVertical.TOP))
                     .into(holder.imageView);
 
             myTagImage = new MyTagTwo("asd", temp.card ,"asd");

@@ -60,19 +60,6 @@ class Cards {
             R.drawable.card50,
             R.drawable.card51,
             R.drawable.card52,
-            R.drawable.card53,
-            R.drawable.card54,
-            R.drawable.card55,
-            R.drawable.card56,
-            R.drawable.card57,
-            R.drawable.card58,
-            R.drawable.card59,
-            R.drawable.card60,
-            R.drawable.card61,
-            R.drawable.card62,
-            R.drawable.card63,
-            R.drawable.card64,
-            R.drawable.card65,
     } ;
 
 
