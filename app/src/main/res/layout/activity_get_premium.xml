@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="rj.pl.memorypower.GetPremium">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/prem1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="What do you get in premium version?"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorPrimary" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/prem1"
+            android:background="@drawable/gradient_line" />
+
+        <TextView
+            android:id="@+id/prem2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/prem1"
+            android:layout_margin="10dp"
+            android:text="-You get UNLIMITED TRIES! "
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/prem2"
+            android:background="@drawable/gradient_line" />
+
+        <ImageView
+            android:id="@+id/img2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/prem2" />
+
+        <TextView
+            android:id="@+id/prem3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img2"
+            android:layout_margin="10dp"
+            android:text="-You get rid of every ad! "
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <ImageView
+            android:id="@+id/img3"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/prem3" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/img3"
+            android:background="@drawable/gradient_line" />
+
+
+        <TextView
+            android:id="@+id/prem4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img3"
+            android:layout_margin="10dp"
+            android:text="-You get acces to CARDS! "
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <ImageView
+            android:id="@+id/img4"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_below="@id/prem4" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/img4"
+            android:background="@drawable/gradient_line" />
+
+        <TextView
+            android:id="@+id/prem5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img4"
+            android:layout_margin="10dp"
+            android:text="-You support creator! So he can add new features!"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Button
+            android:id="@+id/get_premium_buttonGet"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:text="Get it!"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:background="@drawable/my_button_bg"
+            android:layout_below="@id/prem5" android:onClick="buyPremium"/>
+
+
+    </RelativeLayout>
+
+</ScrollView>
