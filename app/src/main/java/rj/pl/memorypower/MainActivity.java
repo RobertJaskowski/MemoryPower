@@ -57,7 +57,7 @@ public class MainActivity extends Activity {
         String[] menuNames = new String[]{"Numbers", "Words", "Cards", "Names", "Ranking", "Stats"};
         Drawable[] menuImages = new Drawable[]{numbersIcon,wordsIcon,cardsIcon,namesIcon,rankingIcon,statsIcon};
 
-        CardAdapterMain adapter = new CardAdapterMain(menuNames, menuImages);
+        CardAdapterMain adapter = new CardAdapterMain(this,menuNames, menuImages);
 
         recyclerView.setAdapter(adapter);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
@@ -70,6 +70,8 @@ public class MainActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+
 
 
         return true;

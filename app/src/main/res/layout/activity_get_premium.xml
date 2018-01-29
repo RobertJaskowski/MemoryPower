@@ -11,9 +11,19 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/youOwnPremiumText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="You own premium"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:visibility="gone" />
+
+        <TextView
             android:id="@+id/prem1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/youOwnPremiumText"
             android:layout_margin="10dp"
             android:text="What do you get in premium version?"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -102,11 +112,12 @@
             android:id="@+id/get_premium_buttonGet"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_below="@id/prem5"
             android:layout_margin="10dp"
-            android:text="Get it!"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:background="@drawable/my_button_bg"
-            android:layout_below="@id/prem5" android:onClick="buyPremium"/>
+            android:onClick="buyPremium"
+            android:text="Get it!"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
     </RelativeLayout>
