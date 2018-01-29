@@ -12,70 +12,70 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
 
 
-            <Button
+            <!--<Button-->
 
-                android:id="@+id/buttonTEMP1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add one" />
+                <!--android:id="@+id/buttonTEMP1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Add one" />-->
 
-            <Button
-                android:id="@+id/buttonTEMP2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add two" />
+            <!--<Button-->
+                <!--android:id="@+id/buttonTEMP2"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Add two" />-->
 
-            <Button
-                android:id="@+id/buttonUpdate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="update" />
+            <!--<Button-->
+                <!--android:id="@+id/buttonUpdate"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="update" />-->
 
-            <EditText
-                android:id="@+id/scoreTEMP"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:hint="score"
-                android:inputType="number" />
-        </LinearLayout>
+            <!--<EditText-->
+                <!--android:id="@+id/scoreTEMP"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:hint="score"-->
+                <!--android:inputType="number" />-->
+        <!--</LinearLayout>-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
 
 
-            <Button
+            <!--<Button-->
 
-                android:id="@+id/buttonTEMP3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="up one" />
+                <!--android:id="@+id/buttonTEMP3"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="up one" />-->
 
-            <Button
-                android:id="@+id/buttonTEMP4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="up two" />
+            <!--<Button-->
+                <!--android:id="@+id/buttonTEMP4"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="up two" />-->
 
-            <Button
-                android:id="@+id/buttonUpdate2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="update" />
+            <!--<Button-->
+                <!--android:id="@+id/buttonUpdate2"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="update" />-->
 
-            <EditText
-                android:id="@+id/scoreTEMP2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:hint="score" />
-        </LinearLayout>
+            <!--<EditText-->
+                <!--android:id="@+id/scoreTEMP2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:hint="score" />-->
+        <!--</LinearLayout>-->
 
 
         <LinearLayout

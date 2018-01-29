@@ -42,10 +42,10 @@
         android:id="@+id/single_card_all_img1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/single_card_all_textView2"
         android:layout_marginEnd="50dp"
         android:src="@drawable/card0"
         android:contentDescription="@string/cardimage"
+        android:layout_centerHorizontal="true"
         />
 
 

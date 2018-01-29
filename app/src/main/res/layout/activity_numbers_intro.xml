@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,7 +22,7 @@
         android:divider="@color/cardview_light_background"
         android:id="@+id/NNumber_picker"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" android:layout_below="@id/startNumberSession"/>
 
 
     <TextView
@@ -30,6 +30,17 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/how_much_numbers"
-        android:textSize="25sp" />
+        android:textSize="25sp" android:layout_below="@id/NNumber_picker" android:layout_centerHorizontal="true"/>
 
-</LinearLayout>
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adViewNumbersIntro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"><!--todo-->
+    </com.google.android.gms.ads.AdView>
+
+</RelativeLayout>

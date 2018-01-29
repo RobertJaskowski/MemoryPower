@@ -44,32 +44,32 @@ import butterknife.OnClick;
 
 public class Ranking extends Activity {
 
-    @BindView(R.id.buttonTEMP1)
-    Button buttonAddOne;
-
-    @BindView(R.id.buttonTEMP2)
-    Button buttonAddTwo;
-
-    @BindView(R.id.buttonUpdate)
-    Button buttonUpdate;
-
-
-    @BindView(R.id.scoreTEMP)
-    EditText scoreTempUp;
-
-
-    @BindView(R.id.buttonTEMP3)
-    Button buttonUpdateOne;
-
-    @BindView(R.id.buttonTEMP4)
-    Button buttonUpdateTwo;
-
-    @BindView(R.id.buttonUpdate2)
-    Button buttonUpdate2;
-
-
-    @BindView(R.id.scoreTEMP2)
-    EditText scoreTempDown;
+//    @BindView(R.id.buttonTEMP1)
+//    Button buttonAddOne;
+//
+//    @BindView(R.id.buttonTEMP2)
+//    Button buttonAddTwo;
+//
+//    @BindView(R.id.buttonUpdate)
+//    Button buttonUpdate;
+//
+//
+//    @BindView(R.id.scoreTEMP)
+//    EditText scoreTempUp;
+//
+//
+//    @BindView(R.id.buttonTEMP3)
+//    Button buttonUpdateOne;
+//
+//    @BindView(R.id.buttonTEMP4)
+//    Button buttonUpdateTwo;
+//
+//    @BindView(R.id.buttonUpdate2)
+//    Button buttonUpdate2;
+//
+//
+//    @BindView(R.id.scoreTEMP2)
+//    EditText scoreTempDown;
 
     @BindView(R.id.rankingSpinnerMonth)
     Spinner rankingSpinnerMonth;
@@ -217,60 +217,60 @@ public class Ranking extends Activity {
         listView.setAdapter(customRankingAdapter);
     }
 
-    @OnClick(R.id.buttonTEMP1)
-    void addScoreToNumbers() {
-        Integer score = Integer.parseInt(scoreTempUp.getText().toString());
-        String name = String.valueOf(scoreTempDown.getText());
-        if (score == 0)
-            score = 3;
-
-        if (name.equals(""))
-            name = "test";
-
-
-
-
-//        Toast.makeText(this, month, Toast.LENGTH_SHORT).show();
-        String key = myRef.child("numbers").push().getKey();
-
-        User testObj = new User(name, score, 35);
-//        myRef.child("numbers").child(currentUser.getUid()).setValue(User);  //todo this works with anonymous auth , its overriding data
-        myRef.child("numbers").child(String.valueOf(month)).child(key).setValue(testObj);
-
-    }
-
-    @OnClick(R.id.buttonTEMP2)
-    void addScoreToWords() {
-
-        Toast.makeText(this, "2", Toast.LENGTH_SHORT).show();
-        String key = myRef.child("words").push().getKey();
-        User testObj = new User("Rob", 5, 35);
-        myRef.child("words").child(currentUser.getUid()).setValue(testObj);
-    }
-
-    @OnClick(R.id.buttonTEMP3)
-    void UpdateScoreNumbers() {
-        Toast.makeText(this, "updatin numbers", Toast.LENGTH_SHORT).show();
-        String key = myRef.child("numbers").getKey();
-        String userKey = myRef.child("numbers").push().getKey();
-        User testObj = new User("Tom", 6, 56);
-        Map<String, Object> postValues = testObj.toMap();
-
-        Map<String, Object> childUpdates = new HashMap<>();
-//        childUpdates.put(key+ "/" + userKey, postValues); //creates new in numbers with key > data
-//        childUpdates.put(key, postValues); // this delates old from numbers but doesnt create user folder,  numbers> data
-        childUpdates.put(key + "/" + currentUser.getUid() + "/", postValues);
-
-
-        myRef.updateChildren(childUpdates);
-
-
-//        if (checkIfFirebaseHasData(key)){
-//            Toast.makeText(this,"has data",Toast.LENGTH_SHORT).show();
-//        }
-
-
-    }
+//    @OnClick(R.id.buttonTEMP1)
+//    void addScoreToNumbers() {
+//        Integer score = Integer.parseInt(scoreTempUp.getText().toString());
+//        String name = String.valueOf(scoreTempDown.getText());
+//        if (score == 0)
+//            score = 3;
+//
+//        if (name.equals(""))
+//            name = "test";
+//
+//
+//
+//
+////        Toast.makeText(this, month, Toast.LENGTH_SHORT).show();
+//        String key = myRef.child("numbers").push().getKey();
+//
+//        User testObj = new User(name, score, 35);
+////        myRef.child("numbers").child(currentUser.getUid()).setValue(User);  // this works with anonymous auth , its overriding data
+//        myRef.child("numbers").child(String.valueOf(month)).child(key).setValue(testObj);
+//
+//    }
+//
+//    @OnClick(R.id.buttonTEMP2)
+//    void addScoreToWords() {
+//
+//        Toast.makeText(this, "2", Toast.LENGTH_SHORT).show();
+//        String key = myRef.child("words").push().getKey();
+//        User testObj = new User("Rob", 5, 35);
+//        myRef.child("words").child(currentUser.getUid()).setValue(testObj);
+//    }
+//
+//    @OnClick(R.id.buttonTEMP3)
+//    void UpdateScoreNumbers() {
+//        Toast.makeText(this, "updatin numbers", Toast.LENGTH_SHORT).show();
+//        String key = myRef.child("numbers").getKey();
+//        String userKey = myRef.child("numbers").push().getKey();
+//        User testObj = new User("Tom", 6, 56);
+//        Map<String, Object> postValues = testObj.toMap();
+//
+//        Map<String, Object> childUpdates = new HashMap<>();
+////        childUpdates.put(key+ "/" + userKey, postValues); //creates new in numbers with key > data
+////        childUpdates.put(key, postValues); // this delates old from numbers but doesnt create user folder,  numbers> data
+//        childUpdates.put(key + "/" + currentUser.getUid() + "/", postValues);
+//
+//
+//        myRef.updateChildren(childUpdates);
+//
+//
+////        if (checkIfFirebaseHasData(key)){
+////            Toast.makeText(this,"has data",Toast.LENGTH_SHORT).show();
+////        }
+//
+//
+//    }
 
 //    boolean checkIfFirebaseHasData(String key) {
 //

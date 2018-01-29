@@ -22,9 +22,27 @@ public class MainActivity extends Activity {
 
 
 
-    @SuppressWarnings("WeakerAccess")
-    @BindDrawable(R.drawable.ic_accessible_white_48dp)
-    Drawable temp;
+
+
+
+    @BindDrawable(R.drawable.ic_filter_7_white_48dp)
+    Drawable numbersIcon;
+
+    @BindDrawable(R.drawable.ic_rate_review_white_48dp)
+    Drawable wordsIcon;
+
+    @BindDrawable(R.drawable.ic_layers_white_48dp)
+    Drawable cardsIcon;
+
+    @BindDrawable(R.drawable.ic_portrait_white_48dp)
+    Drawable namesIcon;
+
+    @BindDrawable(R.drawable.ic_filter_list_white_48dp)
+    Drawable rankingIcon;
+
+    @BindDrawable(R.drawable.ic_timeline_white_48dp)
+    Drawable statsIcon;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +52,10 @@ public class MainActivity extends Activity {
         ButterKnife.bind(this);
 
 
-        //todo change icon
-//        int temp = R.drawable.ic_accessible_white_48dp;
+
 
         String[] menuNames = new String[]{"Numbers", "Words", "Cards", "Names", "Ranking", "Stats"};
-        Drawable[] menuImages = new Drawable[]{temp,temp,temp,temp,temp,temp};
+        Drawable[] menuImages = new Drawable[]{numbersIcon,wordsIcon,cardsIcon,namesIcon,rankingIcon,statsIcon};
 
         CardAdapterMain adapter = new CardAdapterMain(menuNames, menuImages);
 
@@ -77,6 +94,9 @@ public class MainActivity extends Activity {
                     startActivity(goToMarket);
                 }
 
+                break;
+            case R.id.get_premium:
+                startActivity(new Intent(this,GetPremium.class));
                 break;
 
                 default:
