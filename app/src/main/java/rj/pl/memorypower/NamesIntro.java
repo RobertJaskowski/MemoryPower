@@ -28,11 +28,13 @@ public class NamesIntro extends Activity {
      */
     private String[] values;
 
-    AdView adView;
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_names_intro);
+        ButterKnife.bind(this);
 
         SharedPreferences sharedPreferences = getSharedPreferences("MySettings",MODE_PRIVATE);
         boolean pr = sharedPreferences.getBoolean("PR",false);
@@ -42,11 +44,12 @@ public class NamesIntro extends Activity {
             adView = findViewById(R.id.adViewNamesIntro);
 //        AdRequest adRequest = new AdRequest.Builder().addTestDevice("EB1F0516010726D6D702F296F58A1DD4").build();//test purpose
             AdRequest adRequest = new AdRequest.Builder().build();
+
             adView.loadAd(adRequest);
         }
 
-        setContentView(R.layout.activity_names_intro);
-        ButterKnife.bind(this);
+
+
 
         values = new String[24];
 

@@ -42,4 +42,6 @@
         ads:adSize="BANNER"
         ads:adUnitId="ca-app-pub-8569563470793396/1435843558"><!--txdodo-->
     </com.google.android.gms.ads.AdView>
+
+
 </RelativeLayout>
