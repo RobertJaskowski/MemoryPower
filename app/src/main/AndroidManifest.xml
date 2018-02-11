@@ -42,7 +42,9 @@
         <activity android:name=".Stats" />
         <activity android:name=".Ranking" />
         <activity android:name=".Settings" />
-        <activity android:name=".GetPremium"></activity>
+        <activity android:name=".GetPremium" />
+        <activity android:name=".SessionIntro" />
+        <activity android:name=".Session"></activity>
     </application>
 
 </manifest>

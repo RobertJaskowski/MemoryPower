@@ -25,7 +25,7 @@ class CardAdapterMain extends RecyclerView.Adapter<CardAdapterMain.ViewHolder> {
     CardAdapterMain(Context context, String[] captions, Drawable[] imageIds) {
         this.captions = captions;
         this.imageIds = imageIds;
-        this.context  = context;
+        this.context = context;
 
 
     }
@@ -57,47 +57,85 @@ class CardAdapterMain extends RecyclerView.Adapter<CardAdapterMain.ViewHolder> {
         textView.setText(captions[position]);
 
 
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = null;
-                switch (holder.getAdapterPosition()) {
-                    case 0:
-                        intent = new Intent(view.getContext(), NumbersIntro.class);
-                        break;
-                    case 1:
-                        intent = new Intent(view.getContext(), WordsIntro.class);
-                        break;
-                    case 2:
-                        SharedPreferences sharedPreferences = context.getSharedPreferences("MySettings",Context.MODE_PRIVATE);
-                        boolean pr =sharedPreferences.getBoolean("PR",false);
-                        if (pr){
-                            intent = new Intent(view.getContext(), CardsIntro.class);
-                        }else{
-                            intent = new Intent(view.getContext(),GetPremium.class);
-                        }
+        cardView.setOnClickListener((View v) -> {
+            Intent intent = null;
+            int positionAdapter = holder.getAdapterPosition();
+            switch (positionAdapter) {
+                case 0:
+                case 1:
+                case 3:
+                    intent = new Intent(v.getContext(), SessionIntro.class);
 
-                        break;
-                    case 3:
-                        intent = new Intent(view.getContext(), NamesIntro.class);
+                    break;
 
-                        break;
-                    case 4:
-                        intent = new Intent(view.getContext(), Ranking.class);
-                        break;
-                    case 5:
-                        intent = new Intent(view.getContext(), Stats.class);
-                        break;
+                case 2:
+                    SharedPreferences sharedPreferences = context.getSharedPreferences("MySettings", Context.MODE_PRIVATE);
+                    boolean pr = sharedPreferences.getBoolean("PR", false);
+                    if (pr) {
+                        intent = new Intent(v.getContext(), CardsIntro.class);
+                    } else {
+                        intent = new Intent(v.getContext(), GetPremium.class);
+                    }
 
-                }
+                    break;
 
-                if (intent!=null){
-                    view.getContext().startActivity(intent);
-                }else{
-                    Toast.makeText(view.getContext().getApplicationContext(),"Error choose again",Toast.LENGTH_SHORT).show();
-                }
+                case 4:
+                    intent = new Intent(v.getContext(), Ranking.class);
+                    break;
+                case 5:
+                    intent = new Intent(v.getContext(), Stats.class);
+                    break;
+            }
+
+            if (intent != null) {
+                intent.putExtra("selected", positionAdapter);
+                v.getContext().startActivity(intent);
+            } else {
+                Toast.makeText(v.getContext().getApplicationContext(), "Error choose again", Toast.LENGTH_SHORT).show();
             }
         });
+
+//        /*cardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = null;
+//                switch (holder.getAdapterPosition()) {
+//                    case 0:
+//                        intent = new Intent(view.getContext(), NumbersIntro.class);
+//                        break;
+//                    case 1:
+//                        intent = new Intent(view.getContext(), WordsIntro.class);
+//                        break;
+//                    case 2:
+//                        SharedPreferences sharedPreferences = context.getSharedPreferences("MySettings",Context.MODE_PRIVATE);
+//                        boolean pr =sharedPreferences.getBoolean("PR",false);
+//                        if (pr){
+//                            intent = new Intent(view.getContext(), CardsIntro.class);
+//                        }else{
+//                            intent = new Intent(view.getContext(),GetPremium.class);
+//                        }
+//
+//                        break;
+//                    case 3:
+//                        intent = new Intent(view.getContext(), NamesIntro.class);
+//
+//                        break;
+//                    case 4:
+//                        intent = new Intent(view.getContext(), Ranking.class);
+//                        break;
+//                    case 5:
+//                        intent = new Intent(view.getContext(), Stats.class);
+//                        break;
+//
+//                }
+//
+//                if (intent!=null){
+//                    view.getContext().startActivity(intent);
+//                }else{
+//                    Toast.makeText(view.getContext().getApplicationContext(),"Error choose again",Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });*/
 
     }
 

@@ -31,5 +31,6 @@
     <string name="rate_app">Rate app</string>
     <string name="get_premium">Get premium!</string>
     <string name="display_after_month_is_selected">Display after month is selected</string>
+    <string name="how_much">How much?</string>
 
 </resources>
