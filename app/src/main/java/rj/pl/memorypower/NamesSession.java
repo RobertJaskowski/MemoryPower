@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextSwitcher;
@@ -42,7 +43,6 @@ public class NamesSession extends Activity {
     @SuppressWarnings("WeakerAccess")
     public static final String EXTRA_PICKER = "picker";
 
-    @SuppressWarnings("WeakerAccess")
     @BindString(R.string.slash)
     String slash;
 
@@ -51,7 +51,8 @@ public class NamesSession extends Activity {
     int colorAccent;
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.gridViewNames)
-    ExpandableHeightGridView gridView;
+//    ExpandableHeightGridView gridView;
+    GridView gridView;
 
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.text_switcher_names)
@@ -118,7 +119,7 @@ public class NamesSession extends Activity {
 
 
 //        final ExpandableHeightGridView gridView = findViewById(R.id.gridViewWords);
-        gridView.setExpanded(true);
+       // gridView.setExpanded(true);
 
         gridView.setEnabled(false);
 

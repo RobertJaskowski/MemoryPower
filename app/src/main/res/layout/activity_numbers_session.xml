@@ -5,38 +5,56 @@
     tools:context="rj.pl.memorypower.NumbersSession"
     android:id="@+id/numbers_session_relativeMain">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="UselessParent">
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--tools:ignore="UselessParent">-->
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <rj.pl.memorypower.ExpandableHeightGridView
-                android:id="@+id/gridView"
+            <!--<rj.pl.memorypower.ExpandableHeightGridView-->
+                <!--android:id="@+id/gridView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:columnWidth="50dp"-->
+                <!--android:gravity="center"-->
+                <!--android:horizontalSpacing="4dp"-->
+                <!--android:isScrollContainer="false"-->
+                <!--android:numColumns="auto_fit"-->
+                <!--android:stretchMode="columnWidth"-->
+                <!--android:verticalSpacing="5dp"-->
+                <!--android:listSelector="@drawable/my_gridlist_selector"-->
+                <!--android:drawSelectorOnTop="true" />-->
+
+
+            <GridView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/gridView"
                 android:columnWidth="50dp"
                 android:gravity="center"
                 android:horizontalSpacing="4dp"
                 android:isScrollContainer="false"
                 android:numColumns="auto_fit"
+
                 android:stretchMode="columnWidth"
                 android:verticalSpacing="5dp"
                 android:listSelector="@drawable/my_gridlist_selector"
-                android:drawSelectorOnTop="true" />
+                android:drawSelectorOnTop="true"/>
 
 
             <TextSwitcher
                 android:id="@+id/text_switcher"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/gridView"
                 android:layout_marginTop="20dp"
                 android:inAnimation="@android:anim/slide_in_left"
-                android:outAnimation="@android:anim/slide_out_right" />
+                android:outAnimation="@android:anim/slide_out_right"
+                android:layout_below="@id/gridView"
+
+            />
 
             <ProgressBar
                 android:id="@+id/progressBar_number_session"
@@ -82,7 +100,7 @@
                 android:text="@string/done"
                 android:layout_marginBottom="100dp"/>
         </RelativeLayout>
-    </ScrollView>
+    <!--</ScrollView>-->
 
 
 </RelativeLayout>

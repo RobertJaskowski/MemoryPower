@@ -53,7 +53,8 @@ public class NumbersSession extends Activity {
     ProgressBar progressBar;
 
     @BindView(R.id.gridView)
-    ExpandableHeightGridView gridView;
+//    ExpandableHeightGridView gridView;
+GridView gridView;
 
     @BindColor(R.color.colorAccent)
     int colorAccent;
@@ -127,7 +128,7 @@ public class NumbersSession extends Activity {
         pickerValue = (int) getIntent().getExtras().get(EXTRA_PICKER);
 
 
-        gridView.setExpanded(true);
+        //gridView.setExpanded(true);
 
         gridView.setEnabled(false);
 

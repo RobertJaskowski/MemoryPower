@@ -44,32 +44,32 @@
             android:text="-You get UNLIMITED TRIES! "
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/prem2"
-            android:background="@drawable/gradient_line" />
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_below="@id/prem2"-->
+            <!--android:background="@drawable/gradient_line" />-->
 
-        <ImageView
-            android:id="@+id/img2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/prem2" />
+        <!--<ImageView-->
+            <!--android:id="@+id/img2"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/prem2" />-->
 
-        <TextView
-            android:id="@+id/prem3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/img2"
-            android:layout_margin="10dp"
-            android:text="-You get rid of every ad! "
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <!--<TextView-->
+            <!--android:id="@+id/prem3"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/img2"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:text="-You get rid of every ad! "-->
+            <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
 
         <ImageView
             android:id="@+id/img3"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_below="@id/prem3" />
+            android:layout_below="@id/prem2" />
 
         <View
             android:layout_width="match_parent"

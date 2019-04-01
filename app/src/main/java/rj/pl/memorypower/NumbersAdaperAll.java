@@ -128,10 +128,12 @@ class NumbersAdapterAll extends BaseAdapter {
             Number_item temp = list.get(i);
             Number_item tempStart = listaCopiaStart.get(i);
             if (temp.number.equals(tempStart.number)){
-                view.setBackgroundResource(R.color.lightGreen);
+                if(view!=null)
+                    view.setBackgroundResource(R.color.lightGreen);
 //                scoreE++;
 
             }else {
+                if(view!=null)
                 view.setBackgroundResource(R.color.lightDark);
                 holder.textView2.setText(tempStart.number);
                 holder.textView2.setTextColor(view.getResources().getColor(R.color.lightGreen));

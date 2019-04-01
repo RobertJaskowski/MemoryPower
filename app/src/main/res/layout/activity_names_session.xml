@@ -17,7 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="50dp">
 
-            <rj.pl.memorypower.ExpandableHeightGridView
+            <!--<rj.pl.memorypower.ExpandableHeightGridView-->
+            <GridView
                 android:id="@+id/gridViewNames"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

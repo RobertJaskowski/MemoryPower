@@ -9,9 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.NumberPicker;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
+//import com.google.android.gms.ads.AdRequest;
+//import com.google.android.gms.ads.AdView;
+//import com.google.android.gms.ads.MobileAds;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,24 +28,24 @@ public class WordsIntro extends Activity {
      */
     String[] values;
 
-    AdView adView;
-
+//    AdView adView;
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_words_intro);
 
 
-        SharedPreferences sharedPreferences = getSharedPreferences("MySettings",MODE_PRIVATE);
-        boolean pr = sharedPreferences.getBoolean("PR",false);
-        if (!pr) {
-            MobileAds.initialize(this, "ca-app-pub-8569563470793396~4105033645");//changed
-
-            adView = findViewById(R.id.adViewWordsIntro);
-//        AdRequest adRequest = new AdRequest.Builder().addTestDevice("EB1F0516010726D6D702F296F58A1DD4").build();//test purpose
-            AdRequest adRequest = new AdRequest.Builder().build();
-            adView.loadAd(adRequest);
-        }
+//        SharedPreferences sharedPreferences = getSharedPreferences("MySettings",MODE_PRIVATE);
+//        boolean pr = sharedPreferences.getBoolean("PR",false);
+//        if (!pr) {
+//            MobileAds.initialize(this, "ca-app-pub-8569563470793396~4105033645");//changed
+//
+//            adView = findViewById(R.id.adViewWordsIntro);
+////        AdRequest adRequest = new AdRequest.Builder().addTestDevice("EB1F0516010726D6D702F296F58A1DD4").build();//test purpose
+//            AdRequest adRequest = new AdRequest.Builder().build();
+//            adView.loadAd(adRequest);
+//        }
 
 
         ButterKnife.bind(this);

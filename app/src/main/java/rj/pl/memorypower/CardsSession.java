@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -47,8 +48,8 @@ public class CardsSession extends Activity {
 
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.gridViewCards)
-    ExpandableHeightGridView gridView;
-
+    GridView gridView;
+//expandableHeight..
 //    @BindView(R.id.text_switcher_cards)
 //    TextSwitcher textSwitcher;//todo
 
@@ -120,7 +121,7 @@ public class CardsSession extends Activity {
 
 
 //        final ExpandableHeightGridView gridView = findViewById(R.id.gridViewWords);
-        gridView.setExpanded(true);
+       // gridView.setExpanded(true);
 
         gridView.setEnabled(false);
 

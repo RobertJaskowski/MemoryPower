@@ -9,9 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.NumberPicker;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
+//import com.google.android.gms.ads.AdRequest;
+//import com.google.android.gms.ads.AdView;
+//import com.google.android.gms.ads.MobileAds;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +28,7 @@ public class NamesIntro extends Activity {
      */
     private String[] values;
 
-    private AdView adView;
+//    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +36,17 @@ public class NamesIntro extends Activity {
         setContentView(R.layout.activity_names_intro);
         ButterKnife.bind(this);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("MySettings",MODE_PRIVATE);
-        boolean pr = sharedPreferences.getBoolean("PR",false);
-        if (!pr) {
-            MobileAds.initialize(this, "ca-app-pub-8569563470793396~4105033645");//changed
-
-            adView = findViewById(R.id.adViewNamesIntro);
-//        AdRequest adRequest = new AdRequest.Builder().addTestDevice("EB1F0516010726D6D702F296F58A1DD4").build();//test purpose
-            AdRequest adRequest = new AdRequest.Builder().build();
-
-            adView.loadAd(adRequest);
-        }
+//        SharedPreferences sharedPreferences = getSharedPreferences("MySettings",MODE_PRIVATE);
+//        boolean pr = sharedPreferences.getBoolean("PR",false);
+////        if (!pr) {
+////            MobileAds.initialize(this, "ca-app-pub-8569563470793396~4105033645");//changed
+////
+////            adView = findViewById(R.id.adViewNamesIntro);
+//////        AdRequest adRequest = new AdRequest.Builder().addTestDevice("EB1F0516010726D6D702F296F58A1DD4").build();//test purpose
+////            AdRequest adRequest = new AdRequest.Builder().build();
+////
+////            adView.loadAd(adRequest);
+////        }
 
 
 

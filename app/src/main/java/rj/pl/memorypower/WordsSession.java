@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextSwitcher;
@@ -47,7 +48,8 @@ public class WordsSession extends Activity {
     @BindColor(R.color.colorAccent)
     int colorAccent;
     @BindView(R.id.gridViewWords)
-    ExpandableHeightGridView gridView;
+//    ExpandableHeightGridView gridView;
+    GridView gridView;
 
     @BindView(R.id.text_switcher_words)
     TextSwitcher textSwitcher;
@@ -111,7 +113,7 @@ public class WordsSession extends Activity {
 
 
 //        final ExpandableHeightGridView gridView = findViewById(R.id.gridViewWords);
-        gridView.setExpanded(true);
+       // gridView.setExpanded(true);
 
         gridView.setEnabled(false);
 

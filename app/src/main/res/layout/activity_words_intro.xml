@@ -34,15 +34,15 @@
         android:text="@string/how_much_words"
         android:textSize="25sp" />
 
-    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adViewWordsIntro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-8569563470793396/1435843558"><!--txdodo-->
-    </com.google.android.gms.ads.AdView>
+    <!--<com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/adViewWordsIntro"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--ads:adSize="BANNER"-->
+        <!--ads:adUnitId="ca-app-pub-8569563470793396/1435843558">&lt;!&ndash;txdodo&ndash;&gt;-->
+    <!--</com.google.android.gms.ads.AdView>-->
 
 </RelativeLayout>
 
